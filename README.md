@@ -1,26 +1,33 @@
-# Nick Yan — IT Resume Website
+# Nick Yan — IT résumé website
 
-A static personal résumé and portfolio website for Nick Yan, built with HTML, CSS and a small amount of JavaScript.
+Public site: https://mrsomebodyyy.github.io/nick-yan-it-resume/
 
-## Files
+A static English portfolio for IT internship and co-op applications. The existing GitHub Pages repository, main branch and public URL are unchanged.
 
-- `index.html`: page structure, content and links.
-- `styles.css`: styling and responsive layouts.
-- `script.js`: mobile navigation and active-section highlighting.
-- `assets/NickYan_IT_Resume.pdf`: downloadable résumé.
-- `assets/favicon.svg`: browser tab icon.
-- `.nojekyll`: serves these files directly without Jekyll processing.
+## Edit in VS Code
 
-## Edit and preview
+- `index.html`: résumé text, projects and contact links.
+- `styles.css`: layout, colour, fonts and responsive styles.
+- `script.js`: mobile menu, keyboard interactions and GSAP animations.
+- `assets/NickYan_IT_Resume.pdf`: the downloadable résumé. Replace this file using the same name to update the PDF; update the webpage text separately.
+- `assets/share.jpg`: the social sharing preview.
 
-Open this folder in Visual Studio Code. Edit the HTML or CSS, save, then open `index.html` in a browser. The site needs no package installation or build command.
+Save your changes, review them in VS Code Source Control, commit, then push to `main`. GitHub Pages deploys the update automatically. Check the repository's Actions tab and the public website when deployment finishes. No build or package installation is needed.
 
-## Publish with GitHub Pages
+For a local preview, run `python3 -m http.server 8000` from this directory and open http://localhost:8000/ . Basic page content also works when opening index.html directly.
 
-Place these files at the root of the `nick-yan-it-resume` repository. In **Settings → Pages**, select **Deploy from a branch**, then **main** and **/(root)**.
+## Design and animation
 
-Expected address: https://mrsomebodyyy.github.io/nick-yan-it-resume/
+The November 2026 refresh uses Taste Skill's typography, grid and restrained motion guidance, the existing forest-green/cream identity and locally hosted Onest fonts. GSAP 3.15.1 drives the one-time hero entrance and a scroll-linked word-highlight statement. The unchanged Taste motion stylesheet provides button and link feedback.
 
-After deployment, use the live address shown in GitHub Pages settings. Further commits to `main` update the website automatically. If the repository name or hosting address changes, update the canonical URL and `og:url` in `index.html`.
+All content remains readable without JavaScript or when the animation library is unavailable. Reduced-motion preferences disable movement. There are no analytics, forms, remote font dependencies or perpetual animations.
 
-The site and this repository are intended to be public. The résumé contains contact information provided by its owner.
+The small project diagrams depict subject areas; they are not project screenshots. Networking work is explicitly described as simulated academic labs. The PDF was replaced with the owner’s latest supplied resume on November 12, 2026, without altering its contents.
+
+## Vendored assets and licenses
+
+- `assets/vendor/gsap/`: GSAP and ScrollTrigger 3.15.1, from the official npm package. License included.
+- `assets/fonts/`: Onest 400/500/600 from Google Fonts, licensed under SIL OFL 1.1 (included).
+- `assets/taste/motion.css`: unmodified Taste Skill 2.5.1 motion stylesheet; license included.
+
+GitHub Pages uses **Deploy from a branch → main → /(root)**. Keep the repository name and canonical URL unchanged to preserve the website address.

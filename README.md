@@ -12,7 +12,7 @@ A static English portfolio for IT internship and co-op applications. The existin
 - `assets/NickYan_IT_Resume.pdf`: the downloadable résumé. Replace this file using the same name to update the PDF; update the webpage text separately.
 - `assets/share.jpg`: the social sharing preview.
 
-Save your changes, review them in VS Code Source Control, commit, then push to `main`. GitHub Pages deploys the update automatically. Check the repository's Actions tab and the public website when deployment finishes. No build or package installation is needed.
+Save your changes. If you changed `styles.css`, `script.js` or the résumé PDF, run `python3 refresh-asset-versions.py` once from this folder. It updates the asset versions in `index.html` so returning visitors receive the new files instead of an older cached copy. Then review your changes in VS Code Source Control, commit (including `index.html`), and push to `main`. GitHub Pages deploys the update automatically. Check the repository's Actions tab and the public website when deployment finishes. No package installation or compilation is needed.
 
 For a local preview, run `python3 -m http.server 8000` from this directory and open http://localhost:8000/ . Basic page content also works when opening index.html directly.
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="page-type" content="service">
   <meta name="site-kind" content="other">
-  <meta name="description" content="Nick Yan, an Information Technology student at KPU in Vancouver. Academic projects in web development, SQL and networking. Seeking an IT internship or co-op.">
+  <meta name="description" content="Nick Yan, an Information Technology student at KPU in Vancouver. Course projects in Java, Windows Server, Linux, SQL and networking. Seeking an IT internship or co-op.">
   <meta name="theme-color" content="#f8f7f2">
   <meta property="og:title" content="Nick Yan — IT student in Vancouver">
   <meta property="og:description" content="Web development, databases and networking. Get to know Nick, see his academic work and download his résumé.">
@@ -16,12 +16,16 @@
   <link rel="canonical" href="https://mrsomebodyyy.github.io/nick-yan-it-resume/">
   <title>Nick Yan — IT student in Vancouver</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <!-- Resolve the mobile navigation layout before the first paint. With JavaScript
+       disabled, this does not run and the CSS navigation fallback stays available. -->
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preload" href="assets/fonts/Onest-400.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=6e592ef1eadc">
+  <link rel="preload" href="assets/fonts/Onest-500.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=12912e7b272f">
   <link rel="stylesheet" href="assets/taste/motion.css">
   <script src="assets/vendor/gsap/gsap.min.js" defer></script>
   <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
-  <script src="script.js?v=4d64f99602a9" defer></script>
+  <script src="script.js?v=f2234738773b" defer></script>
 </head>
 <body>
   <!-- Taste: service portfolio; split hero; existing forest/cream brand; Onest;
@@ -29,21 +33,62 @@
   <header class="site-header nav">
     <div class="wrap nav-wrap">
       <a class="skip-link" href="#main">Skip to content</a>
-      <a class="wordmark" href="#home" aria-label="Nick Yan, home"><span class="monogram" aria-hidden="true">ny.</span><span>Nick Yan</span></a>
+      <a class="wordmark" href="#home" aria-label="ny. Nick Yan, home"><span class="monogram" aria-hidden="true">ny.</span><span>Nick Yan</span></a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" type="button">Menu <span class="menu-lines" aria-hidden="true"></span></button>
       <nav id="navigation" aria-label="Main navigation">
         <a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#about">About</a>
       </nav>
     </div>
   </header>
+  <!-- Basic navigation is ready as soon as the header is parsed, even if an
+       external animation script is slow or fails to download. -->
+  <script>
+  (() => {
+  const menuButton = document.querySelector('.menu-toggle');
+  const navigation = document.querySelector('#navigation');
+  const closeMenu = () => {
+    menuButton.setAttribute('aria-expanded', 'false');
+    navigation.classList.remove('is-open');
+    document.body.classList.remove('menu-open');
+  };
+  menuButton.addEventListener('click', () => {
+    const open = menuButton.getAttribute('aria-expanded') !== 'true';
+    menuButton.setAttribute('aria-expanded', String(open));
+    navigation.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+  });
+  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    closeMenu();
+    // Move keyboard focus to the destination after closing the full-screen sheet.
+    const destination = document.querySelector(link.getAttribute('href'));
+    destination?.setAttribute('tabindex', '-1');
+    destination?.focus({ preventScroll: true });
+  }));
+  // Keyboard focus should become visible immediately; pointer clicks keep smooth scrolling.
+  document.addEventListener('pointerdown', () => document.documentElement.classList.remove('keyboard-nav'));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Tab') document.documentElement.classList.add('keyboard-nav');
+    if (menuButton.getAttribute('aria-expanded') !== 'true') return;
+    if (event.key === 'Escape') { closeMenu(); menuButton.focus(); }
+    if (event.key === 'Tab') {
+      const last = navigation.querySelector('a:last-child');
+      if (event.shiftKey && document.activeElement === menuButton) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); menuButton.focus(); }
+    }
+  });
+  window.matchMedia('(min-width: 621px)').addEventListener('change', closeMenu);
+  })();
+  </script>
   <main id="main">
     <section class="hero hero--split" id="home" aria-labelledby="hero-title">
       <div class="wrap hero-layout">
         <div class="hero-copy">
           <p class="availability hero-enter"><span class="status-dot" aria-hidden="true"></span> Seeking IT internships &amp; co-op</p>
           <h1 id="hero-title"><span class="title-line"><span>Nick Yan.</span></span><span class="title-line"><span>IT student.</span></span></h1>
-          <p class="hero-intro hero-enter">I’m studying Information Technology at KPU, with a focus on web development, databases and networking.</p>
-          <div class="hero-actions hero-enter"><a class="btn btn--primary" href="assets/NickYan_IT_Resume.pdf?v=4525c739791a" download>Download résumé <span aria-hidden="true">↓</span><span class="sr-only"> (PDF)</span></a><a class="btn btn--secondary" href="#contact">Contact me <span aria-hidden="true">↘</span></a></div>
+          <p class="hero-intro hero-enter">I’m an Information Technology student at KPU, open to roles in IT support, web development, networking and databases.</p>
+          <dl class="hero-facts hero-enter"><div><dt>Graduation</dt><dd>Expected April 2028</dd></div><div><dt>Co-op availability</dt><dd>Flexible start &amp; work-term length</dd></div></dl>
+          <div class="hero-actions hero-enter"><a class="btn btn--primary" href="assets/NickYan_IT_Resume.pdf?v=17649b32c292" download>Download résumé <span aria-hidden="true">↓</span><span class="sr-only"> (PDF)</span></a><a class="btn btn--secondary" href="#contact">Contact me <span aria-hidden="true">↘</span></a></div>
+          <p class="resume-updated hero-enter">Résumé updated <time datetime="2026-11-15">15 Nov 2026</time></p>
           <p class="hero-location hero-enter"><svg width="16" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M17 9c0 6-7 12-7 12S3 15 3 9a7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9" r="2.3" stroke="currentColor" stroke-width="1.5"/></svg> Vancouver, British Columbia</p>
         </div>
         <div class="hero-visual" role="img" aria-label="Nick’s three areas of study: web development, databases and networking">
@@ -51,33 +96,68 @@
           <div class="identity-art" aria-hidden="true"><svg class="circuit" viewBox="0 0 500 400" fill="none"><path class="circuit-path" d="M250 48V110M70 200H160M340 200H430M250 290V352"/><circle cx="250" cy="200" r="138"/><circle cx="250" cy="200" r="104"/><path class="circuit-path" d="M250 62C326 62 388 124 388 200"/><circle class="circuit-end" cx="250" cy="48" r="5"/><circle class="circuit-end" cx="70" cy="200" r="5"/><circle class="circuit-end" cx="430" cy="200" r="5"/><circle class="circuit-end" cx="250" cy="352" r="5"/></svg><span class="identity-mark">ny<span>.</span></span><span class="art-label art-label-web">&lt;/&gt;</span><span class="art-label art-label-data">SQL</span><span class="art-label art-label-network">IPv4 / IPv6</span></div>
           <div class="focus-areas"><span>Web</span><span>Data</span><span>Networks</span></div>
         </div>
-        <div class="hero-foot"><span>Bachelor of Technology · In progress</span><a class="m-link m-link--bare" href="#projects">Selected academic work <span aria-hidden="true">↓</span></a></div>
+        <div class="hero-foot"><span>Bachelor of Technology · Kwantlen Polytechnic University</span><a class="m-link m-link--bare" href="#projects">Explore projects <span aria-hidden="true">↓</span></a></div>
       </div>
     </section>
     <section class="section projects" id="projects" aria-labelledby="projects-title"><div class="wrap">
-      <div class="section-heading"><h2 id="projects-title">Academic projects<span class="heading-dot">.</span></h2><p>Coursework across the browser, <br>the database and the network.</p></div>
+      <div class="section-heading"><h2 id="projects-title">Projects &amp; practice<span class="heading-dot">.</span></h2><p>Course projects with source code, <br>worked examples and lab screenshots.</p></div>
       <div class="project-grid">
-        <article class="project"><div class="project-visual visual-web" aria-hidden="true"><div class="mini-browser"><div class="browser-bar"><i></i><i></i><i></i><span>portfolio.html</span></div><div class="browser-body"><span class="mini-wordmark">Nick Yan.</span><div class="mini-columns"><div><div class="mini-line long"></div><div class="mini-line"></div><div class="mini-button"></div></div><span class="mini-portrait">ny.</span></div><div class="mini-footer"><i></i><i></i><i></i></div></div></div></div><div class="project-copy"><p class="project-meta">Web development</p><h3>Personal portfolio</h3><p>A responsive, multi-page website presenting my background, education and projects.</p><ul class="tags" aria-label="Technologies"><li>HTML</li><li>CSS</li><li>Responsive layout</li></ul><details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><p>Built Home, About, Education, Business Models, Projects, Resume and Contact pages. Used HTML for content structure and CSS for styling.</p><p class="detail-context">Original portfolio coursework</p></div></details></div></article>
-        <article class="project"><div class="project-visual visual-data" aria-hidden="true"><div class="schema-table"><strong>Entity A</strong><span><b>PK</b> primary_key</span><span>attribute</span></div><div class="schema-connector"><span>1</span><i></i><span>∞</span></div><div class="schema-table"><strong>Entity B</strong><span><b>PK</b> primary_key</span><span><b>FK</b> related_key</span></div></div><div class="project-copy"><p class="project-meta">Database design</p><h3>Relational databases</h3><p>Connecting entity relationships to relational schemas and working SQL queries.</p><ul class="tags" aria-label="Technologies"><li>SQL</li><li>ER diagrams</li><li>DDL &amp; DML</li></ul><details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><p>Designed ER diagrams and relational schemas, then implemented data definition (DDL) and data manipulation (DML) queries.</p><p class="detail-context">Academic database projects</p></div></details></div></article>
-        <article class="project"><div class="project-visual visual-network" aria-hidden="true"><div class="topology"><div class="router">Router <span>↔</span></div><div class="network-trunk"></div><div class="switch-row"><div>VLAN A</div><div>VLAN B</div></div><div class="endpoint-row"><i></i><i></i><i></i><i></i></div></div></div><div class="project-copy"><p class="project-meta">Networking</p><h3>Network configuration</h3><p>Practicing device setup and network services in simulated Cisco Packet Tracer labs.</p><ul class="tags" aria-label="Technologies"><li>Packet Tracer</li><li>VLANs</li><li>DHCP</li></ul><details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><p>Configured routers and switches, worked with VLANs and DHCP, and practiced subnetting in Cisco Packet Tracer.</p><p class="detail-context">Academic labs · Simulated networks</p></div></details></div></article>
+        <article class="project" id="project-windows">
+          <div class="project-visual visual-evidence"><img src="assets/evidence/windows-ad-group-membership.png" alt="Original lab screenshot showing three security groups nested in Common Access" width="1024" height="871" loading="lazy"></div>
+          <div class="project-copy"><p class="project-meta">01 / Systems administration · INFO 2416</p><h3>Windows access control</h3><p>Organizing Active Directory accounts and groups, then checking who can open shared folders in a Windows Server lab.</p>
+          <ul class="tags" aria-label="Technologies"><li>Windows Server</li><li>Active Directory</li><li>Group permissions</li></ul>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Task</h4><p>Manage access for different groups of users in a virtual Windows Server 2016 environment.</p><h4>My coursework</h4><p>Created and reorganized organizational units, inspected delegated permissions, and used nested security groups to manage shared-folder access.</p><h4>Result</h4><p>The report records access checks with representative lab accounts, including an opened Student Centre share and denied access to Celebrity Files.</p><a class="evidence-link" href="coursework.html#windows-ad">View the original lab screenshots <span aria-hidden="true">↗</span></a><p class="detail-context">Academic VirtualBox lab with simulated users and a Windows Server client VM.</p></div></details></div>
+        </article>
+        <article class="project" id="project-driving">
+          <div class="project-visual visual-evidence"><img src="assets/evidence/driving-original-report-output.png" alt="Output excerpt from the original Java project report showing fuel costs and an insufficient budget" width="1062" height="908" loading="lazy"></div>
+          <div class="project-copy"><p class="project-meta">02 / Java programming · INFO 2313</p><h3>Driving &amp; fuel simulation</h3><p>A console program that models trip fuel use, compares two sampled fuel stations and writes a trip report.</p>
+          <ul class="tags" aria-label="Technologies"><li>Java</li><li>Objects &amp; arrays</li><li>Text file output</li></ul>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Task</h4><p>Turn a selected vehicle, trip distance and driving conditions into a fuel estimate and budget comparison.</p><h4>Implementation</h4><p>Four Java classes, object arrays and console input. Passenger count, weather, road conditions, air conditioning and luggage adjust fuel use; traffic lights and stop signs are simulated. PrintWriter exports a text report.</p><h4>Result</h4><p>The original source compiles and produces reports for both sufficient and insufficient budgets. Fuel prices and distance are entered by the user.</p><a class="evidence-link" href="coursework.html#java-driving">See source, sample output &amp; limitations <span aria-hidden="true">↗</span></a><p class="detail-context">Educational model. Traffic is randomized; input validation remains a possible improvement.</p></div></details></div>
+        </article>
+        <article class="project" id="project-databases">
+          <div class="project-visual visual-evidence"><img src="assets/evidence/academic-erd.png" alt="ER diagram from a three-person group project modeling Moodle coursework and grading" width="1429" height="1138" loading="lazy"></div>
+          <div class="project-copy"><p class="project-meta">03 / Database coursework · INFO 2312</p><h3>From relationships to SQL</h3><p>A nine-table property schema and a separate group project modeling coursework and grades.</p>
+          <ul class="tags" aria-label="Technologies"><li>SQL</li><li>Primary &amp; foreign keys</li><li>ER modeling</li></ul>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Individual lab · Property database</h4><p>Wrote CREATE TABLE statements for Customer, Phone, Property, Land, House, Bill, Payment, Buy and Sell. The schema uses primary keys, composite keys and nine foreign-key relationships to connect properties, customers and payments.</p><a class="evidence-link" href="assets/evidence/database-schema.sql" download>Download the nine-table SQL schema <span aria-hidden="true">↓</span></a><h4>Group coursework · Three-person team</h4><p>Contributed to a Moodle-inspired database project. The group material covers an ER model, seven relational schemas, SQL joins and weighted grade calculations.</p><a class="evidence-link" href="assets/evidence/academic-erd.png">Open the group ER diagram <span aria-hidden="true">↗</span></a><a class="evidence-link" href="assets/evidence/relational-schema.png">Open the group relational schema <span aria-hidden="true">↗</span></a><p class="detail-context">These are two separate assignments. The ER diagram belongs to the group project; the downloadable SQL belongs to the individual property lab.</p></div></details></div>
+        </article>
+        <article class="project" id="project-networks">
+          <div class="project-visual visual-subnet"><p class="subnet-label">A worked coursework example</p><p class="subnet-address">192.135.250.180<span>/29</span></p><dl><div><dt>Network</dt><dd>192.135.250.176</dd></div><div><dt>Broadcast</dt><dd>192.135.250.183</dd></div><div><dt>Usable hosts</dt><dd>6</dd></div></dl></div>
+          <div class="project-copy"><p class="project-meta">04 / Networking fundamentals · INFO 1212</p><h3>IPv4 subnetting practice</h3><p>Six worked subnetting scenarios, plus end-device settings and packet inspection in guided Packet Tracer activities.</p>
+          <ul class="tags" aria-label="Technologies"><li>IPv4</li><li>Subnet masks</li><li>Packet Tracer</li></ul>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Calculations</h4><p>Calculated network and broadcast addresses, usable host ranges and subnet counts across six IPv4 exercises. The selected numerical results were checked during this portfolio review.</p><h4>Guided simulation</h4><p>Added an end device to a supplied Cisco topology, entered static IPv4 settings, and inspected OSI and Ethernet PDU details in Simulation mode.</p><a class="evidence-link" href="coursework.html#ipv4">See the six worked subnet calculations <span aria-hidden="true">↗</span></a><p class="detail-context">Course exercises using a supplied topology. The evidence shown here covers addressing and packet inspection.</p></div></details></div>
+        </article>
+        <article class="project" id="project-linux">
+          <div class="project-visual visual-evidence"><img src="assets/evidence/linux-apache-https.png" alt="Original lab screenshot of a Kali browser reaching the Ubuntu Apache page over HTTPS" width="1732" height="1137" loading="lazy"></div>
+          <div class="project-copy"><p class="project-meta">05 / Linux server lab · INFO 2411</p><h3>Apache HTTPS on Ubuntu</h3><p>Configuring an Ubuntu web server and reaching it over HTTPS from a Kali client on a private virtual network.</p>
+          <ul class="tags" aria-label="Technologies"><li>Ubuntu Linux</li><li>Apache</li><li>SSH &amp; TLS</li></ul>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Setup</h4><p>Connected Ubuntu and Kali virtual machines, used SSH, and configured Apache with a self-signed certificate and local hostname mapping.</p><h4>Verification</h4><p>Saved a configuration diff, checked Apache syntax, tested connectivity and opened the HTTPS page from the client. The saved ping test shows four replies with zero packet loss.</p><a class="evidence-link" href="coursework.html#linux-https">View HTTPS, configuration &amp; ping evidence <span aria-hidden="true">↗</span></a><p class="detail-context">Local academic lab using a self-signed certificate. Screenshots document the completed exercise.</p></div></details></div>
+        </article>
+        <article class="project" id="project-portfolio">
+          <div class="project-visual visual-screenshot"><img src="assets/images/portfolio-live.png" alt="The published Nick Yan portfolio homepage" width="1100" height="720" loading="lazy"></div>
+          <div class="project-copy"><p class="project-meta">06 / Web development · AI-assisted build</p><h3>This portfolio website</h3><p>A single place to view my work, download my résumé and get in touch, on a phone or desktop.</p>
+          <ul class="tags" aria-label="Technologies"><li>HTML &amp; CSS</li><li>JavaScript</li><li>GSAP</li><li>GitHub Pages</li></ul>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Purpose</h4><p>Turn a résumé and course projects into an accessible website for internship applications.</p><h4>Implementation</h4><p>Semantic HTML, responsive CSS, a mobile navigation menu and native project disclosures. GSAP handles entrance and scroll animations with reduced-motion support. Static files are hosted on GitHub Pages.</p><h4>My role</h4><p>I supplied the résumé and project material, directed the content and design changes, and reviewed the result. AI assisted with the implementation.</p><p class="detail-context">Earlier coursework: a four-page HTML/CSS portfolio with a basic JavaScript interaction.</p><a class="evidence-link" href="https://github.com/MrSomebOdyYY/nick-yan-it-resume" target="_blank" rel="noopener noreferrer">View published website source <span aria-hidden="true">↗</span></a></div></details></div>
+        </article>
       </div>
       <div class="projects-footer"><p>More about my work and learning</p><a class="link" href="https://github.com/MrSomebOdyYY" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a></div>
     </div></section>
     <section class="section experience" id="experience" aria-labelledby="experience-title" data-moment="word-highlight"><div class="wrap">
-      <div class="experience-heading"><h2 id="experience-title">Experience<span class="heading-dot">.</span></h2><p class="experience-statement">My experience combines interface design with customer-facing work that calls for reliability, communication and independent problem-solving.</p></div>
+      <div class="experience-heading"><h2 id="experience-title">Experience<span class="heading-dot">.</span></h2><p class="experience-statement">Webpage layouts, visual communication and customer-facing work have given me different ways to contribute to a team.</p></div>
       <div class="experience-list">
-        <article class="experience-entry"><div><p class="experience-date">Oct — Nov 2023</p><span class="experience-category">Volunteer</span></div><div><h3>Poster Design Volunteer</h3><p class="company">Beijing Subway Service</p></div><p>Designed posters, supported online promotion, and assisted with filming.</p></article>
-        <article class="experience-entry"><div><p class="experience-date">2024 — present</p><span class="experience-category">Service &amp; communication</span></div><div><h3>Delivery Driver</h3><p class="company">Fantuan · 2024–present<br>Uber Eats · 2025–present</p></div><p>Delivering orders across Burnaby, Richmond and Coquitlam. Applying customer service, time management and independent problem-solving to everyday work.</p></article>
-        <article class="experience-entry"><div><p class="experience-date">Jun — Aug 2025</p><span class="experience-category">Design &amp; technology</span></div><div><h3>Interface Design</h3><p class="company">Wall (Beijing) Software Limited Company</p></div><p>Interface design experience at a software company providing application and web design services for construction businesses.</p></article>
+        <article class="experience-entry"><div><p class="experience-date">Jun — Aug 2025</p><span class="experience-category">Design &amp; technology</span></div><div><h3>Interface Design</h3><p class="company">Wall (Beijing) Software Limited Company</p></div><p>Supported webpage design and layout, helping arrange content and visual elements on pages.</p></article>
+        <article class="experience-entry"><div><p class="experience-date">2024 — present</p><span class="experience-category">Service &amp; communication</span></div><div><h3>Delivery Driver</h3><p class="company">Fantuan · 2024–present<br>Uber Eats · 2025–present</p></div><p>Deliver orders across Burnaby, Richmond and Coquitlam, applying customer communication and time management in day-to-day work.</p></article>
+        <article class="experience-entry"><div><p class="experience-date">Oct — Nov 2023</p><span class="experience-category">Volunteer</span></div><div><h3>Poster Design Volunteer</h3><p class="company">Beijing Subway Service</p></div><p>Created posters in Adobe Photoshop, edited videos in Adobe Premiere Pro, and helped with video recording and online promotion.</p></article>
       </div>
     </div></section>
     <section class="section about" id="about" aria-labelledby="about-title"><div class="wrap">
-      <div class="section-heading"><h2 id="about-title">Education &amp; skills<span class="heading-dot">.</span></h2><p>Building a foundation in IT, <br>one course and project at a time.</p></div>
-      <div class="about-grid"><div class="education"><span class="education-mark" aria-hidden="true">KPU<span>↗</span></span><h3>Bachelor of Technology<br>in Information Technology</h3><p>Kwantlen Polytechnic University</p><p class="in-progress"><span class="status-dot" aria-hidden="true"></span> In progress</p><div class="languages"><h4>Languages</h4><p>English <span>Professional working proficiency</span></p><p>Mandarin Chinese <span>Native</span></p></div></div><div class="skills"><h3>Technical toolkit</h3><div class="skill-row"><h4>Web &amp; programming</h4><p>HTML · CSS · JavaScript<br>Python · Java · C++</p></div><div class="skill-row"><h4>Data</h4><p>SQL · Relational database design<br>ER diagrams · DDL &amp; DML</p></div><div class="skill-row"><h4>Networking</h4><p>Cisco Packet Tracer · IPv4 &amp; IPv6<br>VLANs · DHCP · Routing</p></div><div class="skill-row"><h4>Tools</h4><p>GitHub · Visual Studio Code<br>Eclipse · Microsoft Office</p></div></div></div>
+      <div class="section-heading"><h2 id="about-title">About me<span class="heading-dot">.</span></h2><p>A foundation in IT. <br>An interest in how things work together.</p></div>
+      <div class="about-intro"><div><p class="about-lead">I’m Nick, an IT student based in Vancouver.</p><p>I’m interested in web and software development, and my coursework also covers databases and networking. I enjoy seeing how the interface, data and underlying network fit together. I’m open to an internship or co-op across these areas, including IT support.</p></div></div>
+      <div class="about-grid"><div class="education"><span class="education-mark" aria-hidden="true">KPU<span>↗</span></span><h3>Bachelor of Technology<br>in Information Technology</h3><p>Kwantlen Polytechnic University</p><p class="in-progress"><span class="status-dot" aria-hidden="true"></span> Expected April 2028</p><p class="education-note">Coursework includes systems administration, database design, networking, web development and programming.</p><div class="languages"><h4>Languages</h4><p>English <span>Professional working proficiency</span></p><p>Mandarin Chinese <span>Native</span></p></div></div>
+      <div class="skills"><h3>Skills in context</h3><div class="skill-row"><div><h4>Web development</h4><span class="skill-context">Coursework &amp; portfolio</span></div><p>HTML · CSS · JavaScript<br><a href="#project-portfolio">See website project ↗</a></p></div><div class="skill-row"><div><h4>Data</h4><span class="skill-context">Coursework</span></div><p>SQL · ER modeling · DDL &amp; DML<br><a href="#project-databases">See database coursework ↗</a></p></div><div class="skill-row"><div><h4>Networking</h4><span class="skill-context">Simulated labs</span></div><p>Packet Tracer · IPv4 subnetting<br><a href="#project-networks">See networking coursework ↗</a></p></div><div class="skill-row"><div><h4>Programming</h4><span class="skill-context">Coursework</span></div><p>Java · C++ · Python basics<br><a href="#project-driving">See Java project ↗</a></p></div><div class="skill-row"><div><h4>Systems</h4><span class="skill-context">Virtual machine labs</span></div><p>Windows Server · Active Directory<br>Ubuntu · Apache · SSH<br><a href="#project-windows">See systems coursework ↗</a></p></div><div class="skill-row"><div><h4>Design &amp; tools</h4><span class="skill-context">Work &amp; study</span></div><p>Photoshop · Premiere Pro<br>GitHub · VS Code · Eclipse<br>Microsoft Office</p></div></div></div>
     </div></section>
     <section class="section contact" id="contact" aria-labelledby="contact-title"><div class="wrap">
       <div class="contact-heading"><p class="availability"><span class="status-dot" aria-hidden="true"></span> Open to IT internships &amp; co-op</p><h2 id="contact-title">Let’s talk<br>about IT<span>.</span></h2></div>
-      <div class="contact-layout"><div><p>I’m looking for a team where I can contribute, <br>apply what I’ve learned and keep developing.</p><a class="contact-email link" href="mailto:yanyike2022@outlook.com">yanyike2022@outlook.com <span aria-hidden="true">↗</span></a><a class="contact-phone link" href="tel:+16043604217" aria-label="Call Nick Yan at 604-360-4217">604-360-4217 <span aria-hidden="true">↗</span></a></div><div class="contact-links"><a href="assets/NickYan_IT_Resume.pdf?v=4525c739791a" download>Download résumé <span>PDF ↓</span></a><a href="https://www.linkedin.com/in/nickyanitprofile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/MrSomebOdyYY" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div></div>
+      <div class="contact-layout"><div><p>Open to IT support, web development, networking <br>and database opportunities. Flexible start date <br>and work-term length.</p><a class="contact-email link" href="mailto:yanyike2022@outlook.com">yanyike2022@outlook.com <span aria-hidden="true">↗</span></a><a class="contact-phone link" href="tel:+16043604217" aria-label="Call Nick Yan at 604-360-4217">604-360-4217 <span aria-hidden="true">↗</span></a></div><div class="contact-links"><p class="resume-updated">Résumé updated <time datetime="2026-11-15">15 Nov 2026</time></p><a href="assets/NickYan_IT_Resume.pdf?v=17649b32c292" download>Download résumé <span>PDF ↓</span></a><a href="https://www.linkedin.com/in/nickyanitprofile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/MrSomebOdyYY" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div></div>
       <footer class="site-footer"><a class="footer-name" href="#home">Nick Yan<span>.</span></a><p>© <span id="year">2026</span> · Vancouver, BC</p><a class="m-link m-link--bare" href="#home">Back to top ↑</a></footer>
     </div></section>
   </main>

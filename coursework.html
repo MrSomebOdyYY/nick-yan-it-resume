@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f2">
+  <meta name="description" content="Selected evidence from Nick Yan’s Windows Server, Java, IPv4 subnetting and Linux coursework.">
+  <title>Coursework evidence — Nick Yan</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/Onest-400.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=12912e7b272f">
+  <link rel="stylesheet" href="coursework.css?v=457420ed25a2">
+</head>
+<body class="evidence-page">
+  <header class="evidence-header"><div class="wrap"><a class="wordmark" href="./#projects"><span class="monogram" aria-hidden="true">ny.</span><span>Nick Yan</span></a><a class="evidence-back" href="./#projects">← Back to projects</a></div></header>
+  <main id="evidence-main" class="wrap">
+    <div class="evidence-intro"><p class="project-meta">Selected coursework</p><h1>From the lab<br>to the evidence.</h1><p>Original screenshots, source files and worked examples from my courses. Each section explains the task, the result and the scope of the work.</p></div>
+    <nav class="evidence-index" aria-label="Coursework evidence"><a href="#windows-ad">Windows access control</a><a href="#java-driving">Java driving simulation</a><a href="#ipv4">IPv4 subnetting</a><a href="#linux-https">Linux HTTPS lab</a></nav>
+
+    <section class="evidence-section" id="windows-ad" aria-labelledby="windows-title">
+      <div class="evidence-heading"><p class="project-meta">01 / INFO 2416 · Academic virtual-machine lab</p><h2 id="windows-title">Windows access control</h2><p>I used a Windows Server 2016 lab to organize accounts, inspect delegation and control access to shared folders through security groups.</p></div>
+      <div class="evidence-copy"><h3>What I worked on</h3><p>Created and reorganized organizational units (OUs), inspected Account Operators permissions on an OU, and nested the Agents, Celebrities and Students groups in Common Access. I then checked shared-folder access using representative lab accounts.</p><p>The client in this exercise was another Windows Server 2016 VM. The domain and user roles shown below belong to the lab.</p></div>
+      <div class="proof-grid">
+        <figure><a href="assets/evidence/windows-ad-ou-structure.png"><img src="assets/evidence/windows-ad-ou-structure.png" alt="Active Directory Users and Computers showing the revised organizational-unit hierarchy" width="1025" height="872" loading="lazy"></a><figcaption><strong>Organizational units.</strong> Original screenshot from the Assignment 3 response showing the revised hierarchy. <span>Open the image for full size.</span></figcaption></figure>
+        <figure><a href="assets/evidence/windows-ad-group-membership.png"><img src="assets/evidence/windows-ad-group-membership.png" alt="Common Access group properties listing Agents, Celebrities and Students as members" width="1024" height="871" loading="lazy"></a><figcaption><strong>Group nesting.</strong> The Common Access group contains the three role groups.</figcaption></figure>
+        <figure><a href="assets/evidence/windows-share-access-denied.png"><img src="assets/evidence/windows-share-access-denied.png" alt="Windows shows access denied to the Celebrity Files share while Student Centre is open" width="1019" height="872" loading="lazy"></a><figcaption><strong>Access check.</strong> The report identifies this as the Student1 test: Student Centre is open, while Celebrity Files is denied. The signed-in username is not visible in this image.</figcaption></figure>
+      </div>
+      <p class="evidence-source">Source: my INFO 2416 Assignment 3 response, OU task 16 and Security Groups tasks 8–10. The screenshots are unchanged extracts from the report.</p>
+    </section>
+
+    <section class="evidence-section" id="java-driving" aria-labelledby="java-title">
+      <div class="evidence-heading"><p class="project-meta">02 / INFO 2313 · Java console project</p><h2 id="java-title">Driving &amp; fuel simulation</h2><p>A course project that combines vehicle and trip inputs, a simple fuel model, price comparisons and a saved text report.</p></div>
+      <div class="evidence-copy"><h3>How it works</h3><p>The program uses four classes: the main simulation, Car, City and GasStation. Fixed-size object arrays hold the choices. Console prompts collect the distance, passengers, weather, road conditions, air conditioning, luggage and budget.</p><p>Random traffic lights and stop signs add to the model’s fuel estimate. The program samples two different stations from three entered stations, compares prices for the vehicle’s fuel grade, checks the budget and exports the result with PrintWriter.</p><h3>Verified output</h3><p>The unchanged source was compiled and run during this portfolio review. Both a sufficient-budget trip and an insufficient-budget trip produced text reports. The example below is an original output image from my project report.</p></div>
+      <figure class="proof-wide"><a href="assets/evidence/driving-original-report-output.png"><img src="assets/evidence/driving-original-report-output.png" alt="Original project report output: 5.60 litres, CAD 12.55 estimated cost and a budget shortfall" width="1062" height="908" loading="lazy"></a><figcaption>Original report excerpt. Station names and prices are sample input from the exercise; they are not current fuel-price information.</figcaption></figure>
+      <div class="evidence-copy"><h3>Source and a fresh sample run</h3><p>The download contains the four original Java files, a short run guide and sample input/output. A separate review run with a manually entered 75 km distance produced 10.64 L and CAD 23.83 using fictional station prices. Random traffic makes later runs vary.</p><div class="evidence-downloads"><a class="btn btn--primary" href="assets/evidence/driving-simulation-source.zip" download>Download Java source <span aria-hidden="true">↓</span></a><a class="evidence-link" href="assets/evidence/driving-simulation-sample-report.txt">Read the sample TXT report <span aria-hidden="true">↗</span></a><a class="evidence-link" href="assets/evidence/driving-simulation-console.txt">Read the complete console output <span aria-hidden="true">↗</span></a></div><h3>What I would improve next</h3><p>Handle non-numeric and non-finite inputs, allow a choice of output filename, and compare all entered stations. The current version uses a simplified educational fuel model, manually entered distances and prices, and randomized traffic.</p></div>
+      <p class="evidence-source">Source: INFO 2313 individual project source, report and output files. The packaged Java source is unchanged; the run guide and fresh sample were added for the portfolio.</p>
+    </section>
+
+    <section class="evidence-section" id="ipv4" aria-labelledby="ipv4-title">
+      <div class="evidence-heading"><p class="project-meta">03 / INFO 1212 · Guided coursework</p><h2 id="ipv4-title">IPv4 subnetting practice</h2><p>Six completed numerical examples from my subnetting worksheet, presented here in a readable format. The selected network, broadcast, host-range and count results were recalculated during this review.</p></div>
+      <div class="subnet-examples">
+        <article><h3>01 · 192.168.200.139</h3><p class="subnet-prefix">Original /24 → new /27</p><dl><div><dt>Network</dt><dd>192.168.200.128</dd></div><div><dt>Broadcast</dt><dd>192.168.200.159</dd></div><div><dt>First usable</dt><dd>192.168.200.129</dd></div><div><dt>Last usable</dt><dd>192.168.200.158</dd></div><div><dt>Subnets / hosts per subnet</dt><dd>8 / 30</dd></div></dl></article>
+        <article><h3>02 · 10.101.99.228</h3><p class="subnet-prefix">Original /8 → new /17</p><dl><div><dt>Network</dt><dd>10.101.0.0</dd></div><div><dt>Broadcast</dt><dd>10.101.127.255</dd></div><div><dt>First usable</dt><dd>10.101.0.1</dd></div><div><dt>Last usable</dt><dd>10.101.127.254</dd></div><div><dt>Subnets / hosts per subnet</dt><dd>512 / 32766</dd></div></dl></article>
+        <article><h3>03 · 172.22.32.12</h3><p class="subnet-prefix">Original /16 → new /19</p><dl><div><dt>Network</dt><dd>172.22.32.0</dd></div><div><dt>Broadcast</dt><dd>172.22.63.255</dd></div><div><dt>First usable</dt><dd>172.22.32.1</dd></div><div><dt>Last usable</dt><dd>172.22.63.254</dd></div><div><dt>Subnets / hosts per subnet</dt><dd>8 / 8190</dd></div></dl></article>
+        <article><h3>04 · 192.168.1.245</h3><p class="subnet-prefix">Original /24 → new /30</p><dl><div><dt>Network</dt><dd>192.168.1.244</dd></div><div><dt>Broadcast</dt><dd>192.168.1.247</dd></div><div><dt>First usable</dt><dd>192.168.1.245</dd></div><div><dt>Last usable</dt><dd>192.168.1.246</dd></div><div><dt>Subnets / hosts per subnet</dt><dd>64 / 2</dd></div></dl></article>
+        <article><h3>05 · 128.107.0.55</h3><p class="subnet-prefix">Original /16 → new /24</p><dl><div><dt>Network</dt><dd>128.107.0.0</dd></div><div><dt>Broadcast</dt><dd>128.107.0.255</dd></div><div><dt>First usable</dt><dd>128.107.0.1</dd></div><div><dt>Last usable</dt><dd>128.107.0.254</dd></div><div><dt>Subnets / hosts per subnet</dt><dd>256 / 254</dd></div></dl></article>
+        <article><h3>06 · 192.135.250.180</h3><p class="subnet-prefix">Original /24 → new /29</p><dl><div><dt>Network</dt><dd>192.135.250.176</dd></div><div><dt>Broadcast</dt><dd>192.135.250.183</dd></div><div><dt>First usable</dt><dd>192.135.250.177</dd></div><div><dt>Last usable</dt><dd>192.135.250.182</dd></div><div><dt>Subnets / hosts per subnet</dt><dd>32 / 6</dd></div></dl></article>
+      </div>
+      <div class="evidence-copy"><h3>Related Packet Tracer practice</h3><p>In a separate guided activity, I added a PC to a supplied Cisco topology, entered static IPv4 settings and inspected OSI and Ethernet PDU details in Simulation mode. Those screenshots show settings and packet inspection; successful end-to-end connectivity was not recorded in the selected material.</p></div>
+      <p class="evidence-source">Source: my INFO 1212 subnetting worksheet, Part 2, problems 1–6, and the completed Help and Navigation activity response. The worksheet and topology were supplied by the course/Cisco; the six results above are re-typeset from my answers.</p>
+    </section>
+
+    <section class="evidence-section" id="linux-https" aria-labelledby="linux-title">
+      <div class="evidence-heading"><p class="project-meta">04 / INFO 2411 · Private VirtualBox lab</p><h2 id="linux-title">Apache HTTPS on Ubuntu</h2><p>I configured Apache on Ubuntu and tested it from a Kali client, using SSH, local hostname mapping and a self-signed certificate.</p></div>
+      <div class="evidence-copy"><h3>Setup and checks</h3><p>Connected the two VMs, configured certificate paths, enabled the SSL site and saved a configuration diff. The recorded checks include four successful ping replies, Apache’s syntax check and the HTTPS default page in the client browser.</p></div>
+      <div class="proof-grid">
+        <figure><a href="assets/evidence/linux-apache-https.png"><img src="assets/evidence/linux-apache-https.png" alt="Kali Firefox displays the Ubuntu Apache default page at the lab HTTPS hostname" width="1732" height="1137" loading="lazy"></a><figcaption><strong>HTTPS from the client.</strong> The lab hostname uses a local hosts-file mapping and a self-signed certificate.</figcaption></figure>
+        <figure><a href="assets/evidence/linux-apache-configtest.png"><img src="assets/evidence/linux-apache-configtest.png" alt="Terminal shows Apache SSL configuration changes, Syntax OK and a ServerName warning" width="1736" height="1145" loading="lazy"></a><figcaption><strong>Configuration check.</strong> Apache reports Syntax OK. A ServerName warning is also present; the saved screenshot includes both.</figcaption></figure>
+        <figure><a href="assets/evidence/linux-network-ping.png"><img src="assets/evidence/linux-network-ping.png" alt="Ping from the Kali client to Ubuntu shows four replies and zero percent packet loss" width="1710" height="1139" loading="lazy"></a><figcaption><strong>Connectivity.</strong> Four packets transmitted, four received and zero packet loss in the saved lab test.</figcaption></figure>
+      </div>
+      <div class="evidence-copy"><h3>Lab scope</h3><p>These are saved results from a local course exercise. The certificate was self-signed and used a browser exception; it has since expired. The screenshots document the lab at that time, rather than a currently hosted service.</p></div>
+      <p class="evidence-source">Source: my INFO 2411 self-signed SSL lab response, sections 1, 5 and 6. Images are unchanged originals. Private keys and full student reports are not included in the downloads.</p>
+    </section>
+  </main>
+  <footer class="evidence-footer wrap"><p>Nick Yan · Coursework evidence</p><a class="evidence-back" href="./#contact">Contact me ↗</a></footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+Available cars: 
+1. 2021 Subaru WRX STI
+2. 2021 Toyota Corolla LE
+3. 2021 Toyota RAV4 LE AWD
+Choose a car (1-3): You selected: 2021 Subaru WRX STI
+Available cities: 
+1. Vancouver
+2. Surrey
+3. Abbotsford
+Choose a starting city (1-3): 
+Starting city: Vancouver, Canada
+Choose a destination city (1-3): 
+Route: Vancouver to Abbotsford
+Enter travel distance in km: 
+Travel distance: 75.00 km
+Base fuel consumption: 9.60 L
+Enter passenger excluding the driver (0-4): 
+Passengers excluding the driver: 1
+Extra fuel for passengers: 0.19 L
+Fuel including passengers: 9.79 L
+Weather options: 
+1. Sunny
+2. Rainy
+3. Snowy
+Choose weather (1-3): 
+Selected weather: Rainy
+Extra fuel for weather: 0.48 L
+Fuel including passengers and weather: 10.27 L
+Enter road conditions: 
+1. Flat paved road
+2. Uphill road
+3. Rough road
+4. Downhill road
+Choose road condition: 
+Selected road condition: Flat paved road
+Fuel adjustment for road: +0.00 L
+Fuel including passengers, weather and road: 10.27 L
+AC on or off(1 = on, 2 = off): 
+AC on: false
+Extra fuel for AC: 0.00 L
+Fuel including all factors so far: 10.27 L
+Enter luggage weight in kg: 
+Luggage weight: 20.00 kg
+Extra fuel for luggage: 0.04 L
+Fuel including all factors so far: 10.31 L
+Simulated spacing between traffic lights: 6.82 km
+Traffic lights: 10
+Positions: 6.82 km from the start
+Light 1: Yellow
+Extra fuel at this light: 0.01 L
+Positions: 13.64 km from the start
+Light 2: Green
+Extra fuel at this light: 0.00 L
+Positions: 20.45 km from the start
+Light 3: Red
+Extra fuel at this light: 0.03 L
+Positions: 27.27 km from the start
+Light 4: Red
+Extra fuel at this light: 0.03 L
+Positions: 34.09 km from the start
+Light 5: Yellow
+Extra fuel at this light: 0.01 L
+Positions: 40.91 km from the start
+Light 6: Red
+Extra fuel at this light: 0.03 L
+Positions: 47.73 km from the start
+Light 7: Red
+Extra fuel at this light: 0.03 L
+Positions: 54.55 km from the start
+Light 8: Yellow
+Extra fuel at this light: 0.01 L
+Positions: 61.36 km from the start
+Light 9: Green
+Extra fuel at this light: 0.00 L
+Positions: 68.18 km from the start
+Light 10: Red
+Extra fuel at this light: 0.03 L
+Red lights: 5
+Yellow lights: 3
+Green lights: 2
+Extra fuel for traffic lights: 0.18 L
+Fuel including traffic lights: 10.49 L
+Stop signs: 5
+Stop sign 1: Stop
+Extra fuel at this stop: 0.03 L
+Stop sign 2: Stop
+Extra fuel at this stop: 0.03 L
+Stop sign 3: Stop
+Extra fuel at this stop: 0.03 L
+Stop sign 4: Stop
+Extra fuel at this stop: 0.03 L
+Stop sign 5: Stop
+Extra fuel at this stop: 0.03 L
+Extra fuel for stop signs: 0.15 L
+Fuel including traffic lights and stop signs: 10.64 L
+Enter your fuel budget in CAD: Fuel budget: CAD 50.00
+Required fuel grade: Premium
+Gas station 1
+Enter station name: Enter Regular price in CAD/L: Enter Premium price in CAD/L: Gas station 2
+Enter station name: Enter Regular price in CAD/L: Enter Premium price in CAD/L: Gas station 3
+Enter station name: Enter Regular price in CAD/L: Enter Premium price in CAD/L: Three gas stations recorded.
+Selected gas stations:
+1. Demo B
+Regular: CAD 1.900/L
+Premium: CAD 2.240/L
+2. Demo A
+Regular: CAD 1.900/L
+Premium: CAD 2.240/L
+Selected fuel grade: Premium
+Both stations have the same price for this grade.
+Best station for this grade among the two: Demo B
+Selected price: CAD 2.240/L
+Total fuel needed: 10.64 L
+Estimated trip cost: CAD 23.83
+Fuel affordable with your budget: 22.32 L
+Your budget is sufficient for this trip.
+Remaining budget: CAD 26.17
+Report written to ConsumptionReport_YanN.txt

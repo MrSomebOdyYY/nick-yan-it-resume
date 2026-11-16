@@ -1,36 +1,7 @@
 // Progressive enhancement: all résumé content and links work without JavaScript.
 (() => {
-  document.documentElement.classList.add('js');
-  const menuButton = document.querySelector('.menu-toggle');
+  // Basic navigation is initialized inline after the header, without a network dependency.
   const navigation = document.querySelector('#navigation');
-  const closeMenu = () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    navigation.classList.remove('is-open');
-    document.body.classList.remove('menu-open');
-  };
-  menuButton.addEventListener('click', () => {
-    const open = menuButton.getAttribute('aria-expanded') !== 'true';
-    menuButton.setAttribute('aria-expanded', String(open));
-    navigation.classList.toggle('is-open', open);
-    document.body.classList.toggle('menu-open', open);
-  });
-  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    closeMenu();
-    // Move keyboard focus to the destination after closing the full-screen sheet.
-    const destination = document.querySelector(link.getAttribute('href'));
-    destination?.setAttribute('tabindex', '-1');
-    destination?.focus({ preventScroll: true });
-  }));
-  document.addEventListener('keydown', event => {
-    if (menuButton.getAttribute('aria-expanded') !== 'true') return;
-    if (event.key === 'Escape') { closeMenu(); menuButton.focus(); }
-    if (event.key === 'Tab') {
-      const last = navigation.querySelector('a:last-child');
-      if (event.shiftKey && document.activeElement === menuButton) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); menuButton.focus(); }
-    }
-  });
-  window.matchMedia('(min-width: 621px)').addEventListener('change', closeMenu);
   document.querySelector('#year').textContent = new Date().getFullYear();
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {

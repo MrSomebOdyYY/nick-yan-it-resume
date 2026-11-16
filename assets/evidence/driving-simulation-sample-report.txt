@@ -1,0 +1,43 @@
+Driving Simulation Report
+Car: 2021 Subaru WRX STI
+Start: Vancouver, Canada
+Destination: Abbotsford, Canada
+Distance: 75.00 km
+
+Trip conditions
+Passengers excluding driver: 1
+Weather: Rainy
+Road condition: Flat paved road
+AC on: false
+Luggage weight: 20.00 kg
+Traffic lights: 10
+Red lights: 5
+Yellow lights: 3
+Green lights: 2
+Stop signs: 5
+Simulated light spacing: 6.82 km
+
+
+
+Fuel breakdown
+Base fuel: 9.600 L
+Passenger adjustment: 0.192 L
+Weather adjustment: 0.480 L
+Road adjustment: +0.000 L
+AC adjustment: 0.000 L
+Luggage adjustment: 0.038 L
+Traffic light adjustment: 0.180 L
+Stop sign adjustment: 0.150 L
+Total fuel needed: 10.64 L
+
+Price comparison (CAD/L)
+Demo B: Regular 1.900, Premium 2.240
+Demo A: Regular 1.900, Premium 2.240
+Selected station: Demo B
+Fuel grade: Premium
+Price: CAD 2.240/L
+Estimated trip cost: CAD 23.83
+Budget: CAD 50.00
+Budget sufficient: true
+Fuel affordable with budget: 22.32 L
+Remaining budget: CAD 26.17

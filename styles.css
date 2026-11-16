@@ -127,6 +127,13 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
 .about-intro>div{max-width:960px}
 .about-intro p:not(.about-lead){max-width:74ch}
 
+/* The short-lived preparation class is set before paint and automatically
+   removed if animation scripts are late. Never replay an entrance on visible text. */
+@media(prefers-reduced-motion:no-preference){
+  .intro-pending .title-line>span{transform:translate3d(0,105%,0)}
+  .intro-pending .hero-enter{transform:translate3d(0,12px,0);opacity:0;visibility:hidden}
+}
+
 /* ScrollTrigger restores inline smooth scrolling after refresh; keyboard and reduced-motion settings take priority. */
 html.keyboard-nav{scroll-behavior:auto!important}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}

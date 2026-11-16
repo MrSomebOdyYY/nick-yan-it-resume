@@ -15,7 +15,11 @@
   }
 
   // The requested GSAP engine drives the hero and Taste's dealt word-highlight moment.
-  if (!window.gsap || !window.ScrollTrigger) return;
+  const root = document.documentElement;
+  if (!window.gsap || !window.ScrollTrigger) {
+    root.classList.remove('intro-pending');
+    return;
+  }
   gsap.registerPlugin(ScrollTrigger);
   const media = gsap.matchMedia();
   const statement = document.querySelector('.experience-statement');
@@ -35,11 +39,21 @@
   media.add('(prefers-reduced-motion: no-preference)', () => {
     if (!entered) {
       entered = true;
-      const intro = gsap.timeline({defaults:{ease:'power3.out',duration:.8}});
-      intro.from('.title-line > span', {yPercent:105,stagger:.08,clearProps:'transform'}, 0)
-        .from('.hero-enter', {y:12,opacity:0,stagger:.06,duration:.6,clearProps:'transform,opacity'}, .2)
-        .from('.hero-visual', {scale:.98,duration:1,clearProps:'transform'}, 0)
-        .from('.circuit-path', {strokeDasharray:450,strokeDashoffset:450,duration:1.05,clearProps:'strokeDasharray,strokeDashoffset'}, .1);
+      // A late script leaves the already-visible page alone. All starting
+      // styles are applied in the same task before releasing the preparation state.
+      if (root.classList.contains('intro-pending') && !location.hash && !document.hidden) {
+        const intro = gsap.timeline({defaults:{ease:'power3.out',duration:.8}});
+        intro.fromTo('.title-line > span', {y:0,yPercent:105}, {yPercent:0,stagger:.08,clearProps:'transform'}, 0)
+          .fromTo('.hero-enter', {y:12,autoAlpha:0}, {y:0,autoAlpha:1,stagger:.06,duration:.6,clearProps:'transform,opacity,visibility'}, .2)
+          .from('.hero-visual', {scale:.98,duration:1,clearProps:'transform'}, 0)
+          .from('.circuit-path', {strokeDasharray:450,strokeDashoffset:450,duration:1.05,clearProps:'strokeDasharray,strokeDashoffset'}, .1);
+        // A keyboard user can immediately reach every action during the entrance.
+        const finishIntro = () => intro.progress(1);
+        document.addEventListener('keydown', finishIntro, {once:true});
+        intro.eventCallback('onComplete', () => document.removeEventListener('keydown', finishIntro));
+        document.dispatchEvent(new Event('resume:intro-start'));
+      }
+      root.classList.remove('intro-pending');
     }
     gsap.fromTo(statement.querySelectorAll('.word'), {color:'#75877c'}, {
       color:'#183e35',stagger:.12,ease:'none',duration:.3,

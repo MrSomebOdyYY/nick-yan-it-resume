@@ -127,12 +127,26 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
 .about-intro>div{max-width:960px}
 .about-intro p:not(.about-lead){max-width:74ch}
 
-/* The short-lived preparation class is set before paint and automatically
-   removed if animation scripts are late. Never replay an entrance on visible text. */
+/* First-frame entrance: independent of network/GSAP timing. The base styles
+   stay visible, and backwards fill applies starting styles only during delay. */
+@keyframes resume-title-in{from{transform:translate3d(0,105%,0);opacity:0}to{transform:translate3d(0,0,0);opacity:1}}
+@keyframes resume-copy-in{from{transform:translate3d(0,12px,0);opacity:0}to{transform:translate3d(0,0,0);opacity:1}}
+@keyframes resume-visual-in{from{transform:scale(.98)}to{transform:scale(1)}}
+@keyframes resume-circuit-in{from{stroke-dasharray:450;stroke-dashoffset:450}to{stroke-dasharray:450;stroke-dashoffset:0}}
 @media(prefers-reduced-motion:no-preference){
-  .intro-pending .title-line>span{transform:translate3d(0,105%,0)}
-  .intro-pending .hero-enter{transform:translate3d(0,12px,0);opacity:0;visibility:hidden}
+  .hero-intro-enabled .title-line>span{animation:resume-title-in .8s cubic-bezier(.22,.61,.36,1) backwards}
+  .hero-intro-enabled .title-line:last-child>span{animation-delay:.08s}
+  .hero-intro-enabled .hero-enter{animation:resume-copy-in .6s cubic-bezier(.22,.61,.36,1) var(--intro-delay,.2s) backwards}
+  .hero-intro-enabled .hero-intro{--intro-delay:.26s}
+  .hero-intro-enabled .hero-facts{--intro-delay:.32s}
+  .hero-intro-enabled .hero-actions{--intro-delay:.38s}
+  .hero-intro-enabled .resume-updated{--intro-delay:.44s}
+  .hero-intro-enabled .hero-location{--intro-delay:.5s}
+  .hero-intro-enabled .hero-visual{animation:resume-visual-in 1s cubic-bezier(.22,.61,.36,1) backwards}
+  .hero-intro-enabled .circuit-path{animation:resume-circuit-in 1.05s cubic-bezier(.22,.61,.36,1) .1s backwards}
+  .hero-intro-paused :is(.title-line>span,.hero-enter,.hero-visual,.circuit-path){animation-play-state:paused}
 }
+@media print{.hero-intro-enabled :is(.title-line>span,.hero-enter,.hero-visual,.circuit-path){animation:none!important}}
 
 /* ScrollTrigger restores inline smooth scrolling after refresh; keyboard and reduced-motion settings take priority. */
 html.keyboard-nav{scroll-behavior:auto!important}

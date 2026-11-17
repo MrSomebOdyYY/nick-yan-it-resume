@@ -22,31 +22,45 @@
   (() => {
     const root = document.documentElement;
     root.classList.add('js');
-    // Prepare before the first paint. Slow or missing scripts must never hide
-    // text that the visitor has already started reading.
-    if (location.hash || document.hidden ||
-        matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    // CSS starts the entrance on the first frame, without waiting for downloads.
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    if ((location.hash && location.hash !== '#home') || reducedMotion.matches ||
         performance.getEntriesByType('navigation')[0]?.type === 'back_forward') return;
-    root.classList.add('intro-pending');
-    const showContent = () => root.classList.remove('intro-pending');
-    const timeout = setTimeout(showContent, 400);
-    document.addEventListener('resume:intro-start', () => clearTimeout(timeout), {once:true});
+    root.classList.add('hero-intro-enabled');
+    // A background tab keeps its entrance until the visitor actually sees it.
+    const syncVisibility = () => root.classList.toggle('hero-intro-paused', document.hidden);
+    const showContent = () => {
+      root.classList.remove('hero-intro-enabled', 'hero-intro-paused');
+      document.removeEventListener('visibilitychange', syncVisibility);
+      document.removeEventListener('keydown', showContent);
+      document.removeEventListener('pointerdown', showContent);
+      document.removeEventListener('focusin', onControlFocus);
+      reducedMotion.removeEventListener('change', showContent);
+    };
+    const onControlFocus = event => {
+      if (event.target.matches?.('a[href],button,input,select,textarea')) showContent();
+    };
+    syncVisibility();
+    document.addEventListener('visibilitychange', syncVisibility);
     document.addEventListener('keydown', showContent, {once:true});
     document.addEventListener('pointerdown', showContent, {once:true});
+    document.addEventListener('focusin', onControlFocus);
+    reducedMotion.addEventListener('change', showContent, {once:true});
     window.addEventListener('pagehide', showContent, {once:true});
+    window.addEventListener('beforeprint', showContent, {once:true});
   })();
   </script>
   <link rel="preload" href="assets/fonts/Onest-400.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/Onest-500.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=0291219cb044">
+  <link rel="stylesheet" href="styles.css?v=93692ff44764">
   <link rel="stylesheet" href="assets/taste/motion.css">
   <script src="assets/vendor/gsap/gsap.min.js" defer></script>
   <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
-  <script src="script.js?v=e9a5aba311f8" defer></script>
+  <script src="script.js?v=c1296f552b39" defer></script>
 </head>
 <body>
   <!-- Taste: service portfolio; split hero; existing forest/cream brand; Onest;
-       word-highlight moment. GSAP implements motion as requested by the owner. -->
+       CSS entrance and GSAP scroll-linked word highlighting. -->
   <header class="site-header nav">
     <div class="wrap nav-wrap">
       <a class="skip-link" href="#main">Skip to content</a>
@@ -153,7 +167,7 @@
           <div class="project-visual visual-screenshot"><img src="assets/images/portfolio-live.png" alt="The published Nick Yan portfolio homepage" width="1100" height="720" loading="lazy"></div>
           <div class="project-copy"><p class="project-meta">06 / Web development · AI-assisted build</p><h3>This portfolio website</h3><p>A single place to view my work, download my résumé and get in touch, on a phone or desktop.</p>
           <ul class="tags" aria-label="Technologies"><li>HTML &amp; CSS</li><li>JavaScript</li><li>GSAP</li><li>GitHub Pages</li></ul>
-          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Purpose</h4><p>Turn a résumé and course projects into an accessible website for internship applications.</p><h4>Implementation</h4><p>Semantic HTML, responsive CSS, a mobile navigation menu and native project disclosures. GSAP handles entrance and scroll animations with reduced-motion support. Static files are hosted on GitHub Pages.</p><h4>My role</h4><p>I supplied the résumé and project material, directed the content and design changes, and reviewed the result. AI assisted with the implementation.</p><p class="detail-context">Earlier coursework: a four-page HTML/CSS portfolio with a basic JavaScript interaction.</p><a class="evidence-link" href="https://github.com/MrSomebOdyYY/nick-yan-it-resume" target="_blank" rel="noopener noreferrer">View published website source <span aria-hidden="true">↗</span></a></div></details></div>
+          <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Purpose</h4><p>Turn a résumé and course projects into an accessible website for internship applications.</p><h4>Implementation</h4><p>Semantic HTML, responsive CSS, a mobile navigation menu and native project disclosures. CSS handles the entrance animation, while GSAP highlights text on scroll. Both respect reduced-motion preferences. Static files are hosted on GitHub Pages.</p><h4>My role</h4><p>I supplied the résumé and project material, directed the content and design changes, and reviewed the result. AI assisted with the implementation.</p><p class="detail-context">Earlier coursework: a four-page HTML/CSS portfolio with a basic JavaScript interaction.</p><a class="evidence-link" href="https://github.com/MrSomebOdyYY/nick-yan-it-resume" target="_blank" rel="noopener noreferrer">View published website source <span aria-hidden="true">↗</span></a></div></details></div>
         </article>
       </div>
       <div class="projects-footer"><p>More about my work and learning</p><a class="link" href="https://github.com/MrSomebOdyYY" target="_blank" rel="noopener noreferrer">Find me on GitHub <span aria-hidden="true">↗</span></a></div>

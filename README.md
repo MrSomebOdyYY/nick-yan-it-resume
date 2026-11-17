@@ -22,7 +22,7 @@ For a local preview, run `python3 -m http.server 8000` from this directory and o
 
 Project descriptions distinguish individual coursework, group work, supplied lab materials and AI-assisted website development. The coursework page includes source files and selected original evidence, with the limitations of classroom and virtual-machine work stated explicitly. The résumé was updated on November 15, 2026.
 
-The site uses a forest-green and cream palette, locally hosted Onest fonts, and GSAP entrance and scroll animations. Reduced-motion preferences are respected; content remains readable without JavaScript. Navigation supports keyboard use, and project details use native disclosure controls. The local fonts use optional loading to avoid a late font swap; retain the early navigation setup when editing the header.
+The site uses a forest-green and cream palette, locally hosted Onest fonts, CSS entrance animations and GSAP scroll-linked highlighting. The entrance begins with the stylesheet, continues independently of external scripts, and pauses while its tab is hidden. Reduced-motion preferences are respected; content remains readable without JavaScript. Navigation supports keyboard use, and project details use native disclosure controls. The local fonts use optional loading to avoid a late font swap; retain the early navigation setup when editing the header.
 
 There are no analytics, forms or remote font dependencies. The public contact details are included at the owner's request.
 

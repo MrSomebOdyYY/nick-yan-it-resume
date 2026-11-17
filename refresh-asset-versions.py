@@ -10,13 +10,15 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parent
-ASSETS = ("styles.css", "coursework.css", "script.js", "assets/NickYan_IT_Resume.pdf")
+ASSETS = ("styles.css", "coursework.css", "script.js", "assets/bookmarks.css",
+          "assets/bookmarks.js", "assets/favicon.svg", "assets/NickYan_IT_Resume.pdf")
 
 
 def main():
     versions = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()[:12]
                 for name in ASSETS}
-    pattern = r'''((?:href|src)=["'])(styles\.css|coursework\.css|script\.js|assets/NickYan_IT_Resume\.pdf)(?:\?[^"']*)?(["'])'''
+    asset_names = "|".join(re.escape(name) for name in ASSETS)
+    pattern = rf'''((?:href|src)=["'])({asset_names})(?:\?[^"']*)?(["'])'''
     updates = {}
     for path in ROOT.glob("*.html"):
         original = path.read_text(encoding="utf-8")

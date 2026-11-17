@@ -1,0 +1,369 @@
+/* Click-controlled coursework folders. Load after styles.css and motion.css.
+   JavaScript owns selection and panel animation; unenhanced content stays intact. */
+.bookmark-book {
+  --book-paper: #faf9f3;
+  --book-edge: #b3c1ad;
+  --book-ink: #183e35;
+  --book-muted: #52665e;
+  --book-tab: #dce7d5;
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  margin-bottom: 6px;
+  color: var(--book-ink);
+}
+
+/* The previous multi-card grids must not lay out the new controls as cards. */
+.project-grid.bookmark-book,
+.experience-list.bookmark-book,
+.skills.bookmark-book {
+  display: block;
+  grid-template-columns: none;
+  gap: 0;
+}
+.projects:has(.bookmark-book),
+.experience:has(.bookmark-book) { min-height: 0; }
+.about-grid:has(.bookmark-book) > * { min-width: 0; }
+.experience-list.bookmark-book { margin-top: 40px; }
+.skills.bookmark-book > h3 { margin-bottom: 20px; }
+
+.bookmark-book .bookmark-controls {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  min-width: 0;
+  margin-bottom: -1px;
+}
+.bookmark-book .bookmark-rail {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: flex-end;
+  gap: 5px;
+  min-width: 0;
+  min-height: 72px;
+  padding: 8px 2px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+}
+.bookmark-book .bookmark-rail::-webkit-scrollbar { display: none; }
+.bookmark-book .bookmark-tab {
+  appearance: none;
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 54px;
+  max-width: 260px;
+  padding: 13px 20px 14px;
+  border: 1px solid var(--book-edge);
+  border-radius: 12px 12px 0 0;
+  background: var(--book-tab);
+  color: var(--book-ink);
+  font: 500 14px/1.35 var(--font-text, system-ui, sans-serif);
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms var(--ease), color 150ms var(--ease),
+    border-color 150ms var(--ease), transform 120ms var(--ease);
+}
+.bookmark-book .bookmark-tab:nth-child(6n + 2) { --book-tab: #e8e0c7; }
+.bookmark-book .bookmark-tab:nth-child(6n + 3) { --book-tab: #dbe5e1; }
+.bookmark-book .bookmark-tab:nth-child(6n + 4) { --book-tab: #eadbd1; }
+.bookmark-book .bookmark-tab:nth-child(6n + 5) { --book-tab: #d9e5e9; }
+.bookmark-book .bookmark-tab:nth-child(6n + 6) { --book-tab: #e5e5cd; }
+.bookmark-book .bookmark-tab[aria-selected="true"] {
+  z-index: 1;
+  min-height: 64px;
+  padding-top: 18px;
+  padding-bottom: 19px;
+  border-bottom-color: var(--book-paper);
+  background: var(--book-paper);
+  box-shadow: inset 0 3px 0 #215c48;
+}
+.bookmark-book .bookmark-tab:focus-visible {
+  outline: 2px solid #215c48;
+  outline-offset: -6px;
+}
+.bookmark-book .bookmark-arrows {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0 0 10px;
+}
+.bookmark-book :is(.bookmark-prev, .bookmark-next) {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 1px solid var(--book-edge);
+  border-radius: 50%;
+  background: var(--book-paper);
+  color: var(--book-ink);
+  font: 400 21px/1 var(--font-text, system-ui, sans-serif);
+  cursor: pointer;
+  transition: background-color 150ms var(--ease), border-color 150ms var(--ease),
+    transform 120ms var(--ease);
+}
+.bookmark-book :is(.bookmark-prev, .bookmark-next) svg {
+  width: 18px;
+  height: 18px;
+}
+.bookmark-book :is(.bookmark-prev, .bookmark-next):disabled {
+  opacity: .4;
+  cursor: default;
+}
+.bookmark-book :is(.bookmark-prev, .bookmark-next):focus-visible {
+  outline: 2px solid #215c48;
+  outline-offset: 3px;
+}
+
+/* A restrained paper edge, with no texture or decorative content. */
+.bookmark-book .bookmark-pages {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 36px;
+  border: 1px solid var(--book-edge);
+  border-radius: 0 16px 16px 16px;
+  background: var(--book-paper);
+  box-shadow: 0 5px 0 -1px #e1e6da, 0 5px 0 0 var(--book-edge);
+}
+.bookmark-book .bookmark-page {
+  min-width: 0;
+  max-width: 100%;
+  /* html already reserves the fixed header; this leaves the folder tabs visible. */
+  scroll-margin-top: 88px;
+}
+.bookmark-book .bookmark-page[hidden] { display: none !important; }
+.bookmark-book .bookmark-page:focus-visible {
+  outline: 2px solid #215c48;
+  outline-offset: 8px;
+}
+
+/* Project folders retain the original screenshots, disclosures and evidence. */
+.bookmark-book .bookmark-pages > .project {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  align-items: start;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.bookmark-book .project .project-visual {
+  width: 100%;
+  height: auto;
+  max-height: 430px;
+  aspect-ratio: 1.18;
+  border: 1px solid #d5ddcf;
+  border-radius: 10px;
+  background: #fff;
+}
+.bookmark-book .project .project-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.bookmark-book .project .project-copy {
+  display: block;
+  min-width: 0;
+  padding: 0;
+}
+.bookmark-book .project h3 {
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.15;
+}
+.bookmark-book .project-copy > p:not(.project-meta) {
+  min-height: 0;
+  max-width: 53ch;
+  margin-top: 16px;
+  font-size: 16px;
+}
+.bookmark-book .project-copy > .tags { min-height: 0; margin: 20px 0; }
+.bookmark-book .project-copy > details { margin-top: 0; }
+.bookmark-book .project .visual-subnet {
+  align-items: stretch;
+  justify-content: center;
+  padding: 28px;
+  background: #dce6d2;
+  color: #183e35;
+}
+.bookmark-book .visual-subnet :is(.subnet-label, dt) { color: #36554b; }
+.bookmark-book .visual-subnet .subnet-address span { color: #285d44; }
+.bookmark-book .visual-subnet dd { color: #183e35; }
+.bookmark-book .visual-subnet .subnet-address {
+  font-size: clamp(25px, 2.5vw, 36px);
+  overflow-wrap: anywhere;
+}
+
+/* Short work entries need a compact sheet, not a full-screen empty panel. */
+.bookmark-book .bookmark-pages > .experience-entry {
+  display: grid;
+  grid-template-columns: minmax(150px, .65fr) minmax(0, 1.7fr);
+  align-content: start;
+  gap: 18px 36px;
+  min-height: 174px;
+  margin: 0;
+  padding: 4px 0;
+  border: 0;
+}
+.bookmark-book .experience-entry > div:first-child {
+  display: block;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin: 0;
+}
+.bookmark-book .experience-entry > div:nth-child(2) { grid-column: 2; }
+.bookmark-book .experience-entry > p {
+  grid-column: 2;
+  margin: 0;
+  max-width: 65ch;
+  font-size: 16px;
+}
+.bookmark-book .experience-entry h3 { font-size: clamp(27px, 2.6vw, 34px); }
+.bookmark-book .experience-entry .company { font-size: 15px; line-height: 1.6; }
+.bookmark-book .experience-date { font-size: 14px; margin-bottom: 8px; }
+.bookmark-book .experience-category { display: block; font-size: 13px; text-align: left; }
+
+/* Skills live in the existing right-hand About column. */
+.skills.bookmark-book .bookmark-controls { gap: 10px; }
+.skills.bookmark-book .bookmark-tab { padding-inline: 16px; }
+.skills.bookmark-book .bookmark-pages { padding: 28px; }
+.bookmark-book .bookmark-pages > .skill-row {
+  display: block;
+  min-height: 176px;
+  margin: 0;
+  padding: 2px 0;
+  border: 0;
+}
+.bookmark-book .skill-row h4 { font-size: 24px; font-weight: 400; line-height: 1.25; }
+.bookmark-book .skill-row .skill-context { margin-top: 8px; font-size: 13px; }
+.bookmark-book .skill-row p { margin-top: 22px; font-size: 16px; line-height: 1.8; }
+.bookmark-book .skill-row a { min-height: 44px; font-size: 14px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .bookmark-book .bookmark-tab:not([aria-selected="true"]):hover {
+    border-color: #718a6d;
+    transform: translateY(-2px);
+  }
+  .bookmark-book :is(.bookmark-prev, .bookmark-next):not(:disabled):hover {
+    border-color: #718a6d;
+    background: #e7eddc;
+    transform: translateY(-1px);
+  }
+}
+.bookmark-book :is(.bookmark-prev, .bookmark-next):not(:disabled):active {
+  transform: translateY(1px) scale(.985);
+}
+
+@media (max-width: 1050px) {
+  .bookmark-book .bookmark-pages { padding: 28px; }
+  .bookmark-book .bookmark-pages > .project { gap: 28px; }
+  .skills.bookmark-book .bookmark-controls { flex-wrap: wrap; gap: 0; }
+  .skills.bookmark-book .bookmark-rail { flex-basis: 100%; order: 1; }
+  .skills.bookmark-book .bookmark-arrows {
+    order: 0;
+    justify-content: flex-end;
+    margin-left: auto;
+    padding: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .bookmark-book .bookmark-pages > .project { grid-template-columns: minmax(0, 1fr); }
+  .bookmark-book .project .project-visual { max-height: 360px; aspect-ratio: 1.45; }
+  .bookmark-book .bookmark-pages > .experience-entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    min-height: 0;
+  }
+  .bookmark-book .experience-entry > div:first-child {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .bookmark-book .experience-entry > div:nth-child(2),
+  .bookmark-book .experience-entry > p { grid-column: auto; }
+  .bookmark-book .experience-category { text-align: right; }
+  .bookmark-book .experience-date { margin: 0; }
+}
+
+@media (max-width: 620px) {
+  .bookmark-book .bookmark-controls { gap: 8px; }
+  .bookmark-book .bookmark-rail { gap: 4px; min-height: 66px; }
+  .bookmark-book .bookmark-tab { min-height: 50px; padding: 12px 15px; font-size: 13px; }
+  .bookmark-book .bookmark-tab[aria-selected="true"] {
+    min-height: 58px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .bookmark-book .bookmark-arrows { gap: 4px; padding-bottom: 7px; }
+  .bookmark-book .bookmark-pages { padding: 22px; border-radius: 0 12px 12px 12px; }
+  .bookmark-book .bookmark-page { scroll-margin-top: 80px; }
+  .bookmark-book .bookmark-pages > .project { gap: 24px; }
+  .bookmark-book .project .project-visual { max-height: none; border-radius: 7px; }
+  .bookmark-book .project h3 { font-size: 27px; }
+  .bookmark-book .project .visual-subnet {
+    aspect-ratio: auto;
+    min-height: 210px;
+    padding: 20px;
+  }
+  .bookmark-book .visual-subnet .subnet-address { font-size: clamp(22px, 6vw, 29px); }
+  .bookmark-book .experience-entry h3 { font-size: 27px; }
+  .bookmark-book .experience-date { font-size: 12px; }
+  .bookmark-book .experience-category { font-size: 12px; }
+  .experience-list.bookmark-book { margin-top: 32px; }
+  .skills.bookmark-book .bookmark-controls { flex-wrap: nowrap; gap: 8px; }
+  .skills.bookmark-book .bookmark-rail { flex-basis: auto; order: 0; }
+  .skills.bookmark-book .bookmark-arrows { order: 1; margin-left: 0; padding: 0 0 7px; }
+  .skills.bookmark-book .bookmark-pages { padding: 24px; border-top-left-radius: 0; }
+  .bookmark-book .bookmark-pages > .skill-row { min-height: 170px; }
+}
+
+@media (max-width: 360px) {
+  .bookmark-book .project .visual-subnet { padding-inline: 14px; }
+  .bookmark-book .visual-subnet .subnet-address { font-size: 18px; }
+  .bookmark-book .subnet-address span { margin-left: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bookmark-book .bookmark-rail { scroll-behavior: auto; }
+  .bookmark-book :is(.bookmark-tab, .bookmark-prev, .bookmark-next) { transition: none; }
+  .bookmark-book :is(.bookmark-tab, .bookmark-prev, .bookmark-next):is(:hover, :active) {
+    transform: none;
+  }
+}
+
+@media print {
+  .bookmark-book .bookmark-controls { display: none !important; }
+  .bookmark-book .bookmark-pages { height: auto !important; padding: 0; border: 0; background: none; box-shadow: none; }
+  .bookmark-book .bookmark-pages > .bookmark-page,
+  .bookmark-book .bookmark-pages > .bookmark-page[hidden] {
+    display: block !important;
+    position: static !important;
+    min-height: 0;
+    margin-bottom: 24px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    break-inside: avoid;
+  }
+  .bookmark-book .experience-entry > p { margin-top: 14px; }
+}

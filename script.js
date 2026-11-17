@@ -38,8 +38,13 @@
       scrollTrigger:{trigger:statement,start:'top 85%',end:'bottom 45%',scrub:true}
     });
   });
-  // Native disclosures change layout; keep the statement's scroll positions accurate.
-  document.querySelectorAll('details').forEach(detail => detail.addEventListener('toggle', () => ScrollTrigger.refresh()));
+  // Different projects and their disclosures may change the position of Experience.
+  const projects = document.querySelector('.project-grid');
+  if (projects && 'ResizeObserver' in window) {
+    new ResizeObserver(() => requestAnimationFrame(() => ScrollTrigger.refresh())).observe(projects);
+  } else {
+    document.querySelectorAll('details').forEach(detail => detail.addEventListener('toggle', () => ScrollTrigger.refresh()));
+  }
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
   window.addEventListener('beforeprint', () => media.revert());
 })();

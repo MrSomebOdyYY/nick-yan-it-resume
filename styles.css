@@ -132,7 +132,11 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
 @keyframes resume-title-in{from{transform:translate3d(0,105%,0);opacity:0}to{transform:translate3d(0,0,0);opacity:1}}
 @keyframes resume-copy-in{from{transform:translate3d(0,12px,0);opacity:0}to{transform:translate3d(0,0,0);opacity:1}}
 @keyframes resume-visual-in{from{transform:scale(.98)}to{transform:scale(1)}}
-@keyframes resume-circuit-in{from{stroke-dasharray:450;stroke-dashoffset:450}to{stroke-dasharray:450;stroke-dashoffset:0}}
+/* Shrink each dash and its offset together until the path becomes solid. */
+@keyframes resume-circuit-in {
+  from { stroke-dasharray: 450; stroke-dashoffset: 450; }
+  to   { stroke-dasharray: 0; stroke-dashoffset: 0; }
+}
 @media(prefers-reduced-motion:no-preference){
   .hero-intro-enabled .title-line>span{animation:resume-title-in .8s cubic-bezier(.22,.61,.36,1) backwards}
   .hero-intro-enabled .title-line:last-child>span{animation-delay:.08s}
@@ -143,7 +147,13 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
   .hero-intro-enabled .resume-updated{--intro-delay:.44s}
   .hero-intro-enabled .hero-location{--intro-delay:.5s}
   .hero-intro-enabled .hero-visual{animation:resume-visual-in 1s cubic-bezier(.22,.61,.36,1) backwards}
-  .hero-intro-enabled .circuit-path{animation:resume-circuit-in 1.05s cubic-bezier(.22,.61,.36,1) .1s backwards}
+  .hero-intro-enabled .circuit-path {
+    animation: resume-circuit-in 1.05s cubic-bezier(.25, 1, .5, 1) .1s backwards;
+    /* The review animation's GSAP power3.out, sampled at 5% intervals. */
+    animation-timing-function: linear(0, .185494, .3439, .477994, .5904,
+      .683594, .7599, .821494, .8704, .908494, .9375, .958994, .9744,
+      .984994, .9919, .996094, .9984, .999494, .9999, .999994, 1);
+  }
   .hero-intro-paused :is(.title-line>span,.hero-enter,.hero-visual,.circuit-path){animation-play-state:paused}
 }
 @media print{.hero-intro-enabled :is(.title-line>span,.hero-enter,.hero-visual,.circuit-path){animation:none!important}}

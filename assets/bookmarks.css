@@ -343,6 +343,32 @@
   .bookmark-book .subnet-address span { margin-left: 4px; }
 }
 
+/* Show the original proportions of evidence screenshots, including on phones. */
+.project .project-visual.visual-capture {
+  display: block;
+  aspect-ratio: auto;
+  height: auto;
+  max-height: none;
+  border: 1px solid #bac8b7;
+  background: white;
+  cursor: zoom-in;
+}
+.project .project-visual.visual-capture img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: none;
+}
+.project-detail .project-visual.visual-subnet {
+  aspect-ratio: auto;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  max-width: 28rem;
+  padding: 16px;
+  margin: 14px 0 24px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bookmark-book .bookmark-rail { scroll-behavior: auto; }
   .bookmark-book :is(.bookmark-tab, .bookmark-prev, .bookmark-next) { transition: none; }

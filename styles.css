@@ -118,6 +118,7 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
 @media(max-width:620px){
   .hero-visual{height:192px;padding:16px}
   .hero-visual .art-label{display:none}
+  .hero-visual .circuit{opacity:.38}
   .identity-signature{height:76%;max-width:254px}
   .hero-visual .focus-areas{padding-top:12px}
   .contact h2{font-size:clamp(42px,12vw,60px)}

@@ -160,6 +160,29 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
 }
 @media print{.hero-intro-enabled :is(.title-line>span,.hero-enter,.hero-visual,.circuit-path){animation:none!important}}
 
+/* The mask reveals the finished lettering along its pen routes, including the return to dot the i. */
+.identity-signature [data-stroke]{
+  visibility:hidden;
+  stroke-dasharray:1 2;
+  stroke-dashoffset:1;
+}
+@keyframes write-signature{
+  from{visibility:visible;stroke-dashoffset:1}
+  to{visibility:visible;stroke-dashoffset:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  .identity-signature[data-pen-state="writing"] [data-stroke]{
+    animation:write-signature var(--duration) ease-in-out var(--start) forwards;
+  }
+  @supports (animation-timing-function:linear(0, .4 40%, 1)){
+    .identity-signature[data-pen-state="writing"] [data-stroke]{animation-timing-function:var(--pace)}
+  }
+  .identity-signature.pen-paused [data-stroke]{animation-play-state:paused}
+}
+@media print, (prefers-reduced-motion:reduce){
+  .signature-ink{mask:none}
+}
+
 /* ScrollTrigger restores inline smooth scrolling after refresh; keyboard and reduced-motion settings take priority. */
 html.keyboard-nav{scroll-behavior:auto!important}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}

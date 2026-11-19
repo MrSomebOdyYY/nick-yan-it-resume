@@ -47,6 +47,44 @@
     }, true);
   }
 
+  function makeBookmarkWash(sheet) {
+    const wash = element('span', 'bookmark-wash');
+    wash.setAttribute('aria-hidden', 'true');
+    sheet.prepend(wash);
+    let ripple;
+    function settle() {
+      sheet.classList.add('bookmark-filled');
+      ripple?.cancel();
+      ripple = undefined;
+    }
+    reducedMotion.addEventListener('change', () => {
+      if (reducedMotion.matches && ripple) settle();
+    });
+    return function paint(tab, click) {
+      if (ripple) {
+        ripple.onfinish = null;
+        ripple.cancel();
+      }
+      if (reducedMotion.matches || !wash.animate) {
+        settle();
+        return;
+      }
+      const bounds = wash.getBoundingClientRect();
+      // A keyboard activation starts directly underneath its bookmark.
+      const pointerX = click?.detail ? click.clientX : tab.left + tab.width / 2;
+      const x = Math.max(0, Math.min(bounds.width, pointerX - bounds.left));
+      const y = click?.detail ? Math.min(0, Math.max(-64, click.clientY - bounds.top)) : 0;
+      const radius = Math.ceil(Math.hypot(Math.max(x, bounds.width - x), bounds.height - y)) + 1;
+      const circle = size => `circle(${size}px at ${x}px ${y}px)`;
+      ripple = wash.animate([
+        { clipPath: circle(0), backgroundColor: 'var(--book-wave)' },
+        { clipPath: circle(radius), backgroundColor: 'var(--book-wave)', offset: .76 },
+        { clipPath: circle(radius), backgroundColor: 'var(--book-fill)' }
+      ], { duration: 400, easing: 'cubic-bezier(.3,.05,.3,1)', fill: 'both' });
+      ripple.onfinish = settle;
+    };
+  }
+
   function makeBook(book) {
     const name = book.dataset.book;
     const pages = Array.from(book.querySelectorAll(':scope > [data-tab-label]'));
@@ -62,6 +100,7 @@
     controls.append(rail, arrows);
     const sheet = element('div', 'bookmark-pages');
     pages[0].before(controls, sheet);
+    const paint = makeBookmarkWash(sheet);
     const tabs = pages.map((page, index) => {
       page.id ||= name.toLowerCase() + '-page-' + (index + 1);
       const tab = element('button', 'bookmark-tab');
@@ -79,11 +118,8 @@
       return tab;
     });
     let active = -1;
-    let entrance;
-    function select(index, { animate = false, focus = false, remember = false } = {}) {
-      const previous = active;
-      if (previous !== index) {
-        entrance?.cancel();
+    function select(index, { animate = false, focus = false, remember = false, click } = {}) {
+      if (active !== index) {
         active = index;
         tabs.forEach((tab, i) => {
           tab.tabIndex = i === index ? 0 : -1;
@@ -92,17 +128,11 @@
         });
         prev.disabled = index === 0;
         next.disabled = index === pages.length - 1;
-        if (animate && !reducedMotion.matches && pages[index].animate) {
-          const distance = index > previous ? 14 : -14;
-          entrance = pages[index].animate([
-            { opacity: 0.28, transform: 'translateX(' + distance + 'px)' },
-            { opacity: 1, transform: 'translateX(0)' }
-          ], { duration: 250, easing: 'cubic-bezier(.2,.75,.25,1)' });
-        }
       }
       if (focus) tabs[index].focus({ preventScroll: true });
       // Move only the tab strip; turning a page should never scroll the document.
       const tab = tabs[index].getBoundingClientRect();
+      if (animate) paint(tab, click);
       const strip = rail.getBoundingClientRect();
       if (tab.left < strip.left || tab.right > strip.right) {
         rail.scrollBy({ left: (tab.left + tab.right - strip.left - strip.right) / 2,
@@ -114,10 +144,10 @@
     }
     pages.forEach((page, i) => {
       openById.set(page.id, () => select(i));
-      tabs[i].addEventListener('click', () => select(i, { animate: true, remember: true }));
+      tabs[i].addEventListener('click', click => select(i, { animate: true, remember: true, click }));
     });
-    function step(index) {
-      select(index, { animate: true, remember: true, focus: true });
+    function step(index, click) {
+      select(index, { animate: true, remember: true, focus: true, click });
     }
     rail.addEventListener('keydown', event => {
       const count = tabs.length;
@@ -127,8 +157,8 @@
       event.preventDefault();
       step(destinations[event.key]);
     });
-    prev.addEventListener('click', () => step(active - 1));
-    next.addEventListener('click', () => step(active + 1));
+    prev.addEventListener('click', click => step(active - 1, click));
+    next.addEventListener('click', click => step(active + 1, click));
     enableMouseDrag(rail);
     book.classList.add('bookmark-book');
     const initial = pages.findIndex(page => '#' + page.id === location.hash);

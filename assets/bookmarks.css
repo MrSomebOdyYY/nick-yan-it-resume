@@ -5,7 +5,9 @@
   --book-edge: #b3c1ad;
   --book-ink: #183e35;
   --book-muted: #52665e;
-  --book-tab: #dce7d5;
+  --book-fill: #dce7d5;
+  --book-wave: #c6dea9;
+  --book-tab: var(--book-fill);
   position: relative;
   min-width: 0;
   max-width: 100%;
@@ -43,7 +45,7 @@
   gap: 5px;
   min-width: 0;
   min-height: 72px;
-  padding: 8px 2px 0;
+  padding: 8px 0 0;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
@@ -62,9 +64,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 54px;
+  min-height: 64px;
   max-width: 260px;
-  padding: 13px 20px 14px;
+  padding: 13px 20px;
   border: 1px solid var(--book-edge);
   border-radius: 12px 12px 0 0;
   background: var(--book-tab);
@@ -74,7 +76,7 @@
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 150ms var(--ease), color 150ms var(--ease),
-    border-color 150ms var(--ease), transform 120ms var(--ease);
+    border-color 150ms var(--ease);
 }
 .bookmark-book .bookmark-tab:nth-child(6n + 2) { --book-tab: #e8e0c7; }
 .bookmark-book .bookmark-tab:nth-child(6n + 3) { --book-tab: #dbe5e1; }
@@ -83,9 +85,6 @@
 .bookmark-book .bookmark-tab:nth-child(6n + 6) { --book-tab: #e5e5cd; }
 .bookmark-book .bookmark-tab[aria-selected="true"] {
   z-index: 1;
-  min-height: 64px;
-  padding-top: 18px;
-  padding-bottom: 19px;
   border-bottom-color: var(--book-paper);
   background: var(--book-paper);
   box-shadow: inset 0 3px 0 #215c48;
@@ -134,6 +133,7 @@
 /* A restrained paper edge, with no texture or decorative content. */
 .bookmark-book .bookmark-pages {
   position: relative;
+  isolation: isolate;
   z-index: 1;
   min-width: 0;
   padding: 36px;
@@ -141,6 +141,19 @@
   border-radius: 0 16px 16px 16px;
   background: var(--book-paper);
   box-shadow: 0 5px 0 -1px #e1e6da, 0 5px 0 0 var(--book-edge);
+}
+.bookmark-book .bookmark-wash {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  clip-path: circle(0);
+  pointer-events: none;
+}
+.bookmark-book .bookmark-filled { background-color: var(--book-fill); }
+.bookmark-book:has(.bookmark-filled) .bookmark-tab[aria-selected="true"] {
+  background-color: var(--book-fill);
+  border-bottom-color: var(--book-fill);
 }
 .bookmark-book .bookmark-page {
   min-width: 0;
@@ -258,7 +271,6 @@
 @media (hover: hover) and (pointer: fine) {
   .bookmark-book .bookmark-tab:not([aria-selected="true"]):hover {
     border-color: #718a6d;
-    transform: translateY(-2px);
   }
   .bookmark-book :is(.bookmark-prev, .bookmark-next):not(:disabled):hover {
     border-color: #718a6d;
@@ -308,12 +320,7 @@
 @media (max-width: 620px) {
   .bookmark-book .bookmark-controls { gap: 8px; }
   .bookmark-book .bookmark-rail { gap: 4px; min-height: 66px; }
-  .bookmark-book .bookmark-tab { min-height: 50px; padding: 12px 15px; font-size: 13px; }
-  .bookmark-book .bookmark-tab[aria-selected="true"] {
-    min-height: 58px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
+  .bookmark-book .bookmark-tab { min-height: 58px; padding: 12px 15px; font-size: 13px; }
   .bookmark-book .bookmark-arrows { gap: 4px; padding-bottom: 7px; }
   .bookmark-book .bookmark-pages { padding: 22px; border-radius: 0 12px 12px 12px; }
   .bookmark-book .bookmark-page { scroll-margin-top: 80px; }
@@ -378,6 +385,7 @@
 }
 
 @media print {
+  .bookmark-book .bookmark-wash { display: none; }
   .bookmark-book .bookmark-controls { display: none !important; }
   .bookmark-book .bookmark-pages { height: auto !important; padding: 0; border: 0; background: none; box-shadow: none; }
   .bookmark-book .bookmark-pages > .bookmark-page,

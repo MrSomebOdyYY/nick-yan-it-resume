@@ -11,6 +11,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parent
 ASSETS = ("styles.css", "coursework.css", "script.js", "assets/bookmarks.css",
+          "assets/portfolio-motion.css", "assets/portfolio-motion.js", "assets/section-motion.css",
+          "assets/section-motion.js", "assets/project-strip.css", "assets/project-strip.js",
           "assets/bookmarks.js", "assets/favicon.svg", "assets/NickYan_IT_Resume.pdf",
           "assets/images/nick-yan-signature.svg", "assets/images/portfolio-live.png", "assets/evidence/packet-tracer-topology-osi.png",
           "assets/evidence/packet-tracer-topology-pdu.png")

@@ -1,0 +1,90 @@
+/* The résumé stays readable without this enhancement. GSAP alone owns the
+   temporary transforms/opacity; no CSS entrance animation competes with it. */
+.motion-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 680px;
+  margin: 32px 0 0;
+  padding: 22px 0;
+  border-block: 1px solid var(--line);
+}
+.motion-facts > div { display: flex; flex-direction: column-reverse; gap: 5px; }
+.motion-facts dt { font-size: 12px; line-height: 1.5; color: var(--muted); }
+.motion-facts dd { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: -.04em; }
+[data-motion-count], .motion-count-value {
+  display: inline-block;
+  min-width: 2ch;
+  font-variant-numeric: tabular-nums;
+}
+.section-motion-running { will-change: transform, opacity; }
+
+/* Preserve the original heading, line break and punctuation. The small wash
+   is decorative and sits behind each complete word, so it cannot move text. */
+.contact { position: relative; isolation: isolate; }
+.contact .wrap { position: relative; z-index: 1; }
+.contact h2 .contact-motion-word {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  color: inherit;
+}
+.contact-word-accent {
+  position: absolute;
+  left: -.025em;
+  right: -.025em;
+  bottom: .035em;
+  height: .2em;
+  border-radius: .035em;
+  background: #b7d68f;
+  transform-origin: left center;
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.contact-motion-ambient {
+  position: absolute;
+  top: 72px;
+  right: max(5%, calc((100% - 1280px) / 2));
+  width: clamp(160px, 29vw, 380px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  contain: paint;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+}
+.contact-motion-orbit {
+  position: absolute;
+  inset: 8%;
+  border: 1px solid rgb(192 216 170 / .18);
+  border-radius: 50%;
+}
+.contact-motion-orbit + .contact-motion-orbit { inset: 23%; border-style: dashed; }
+.contact-motion-orbit::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 14%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #bed7a2;
+}
+@media (max-width: 620px) {
+  .motion-facts { gap: 12px; margin-top: 28px; padding-block: 18px; }
+  .motion-facts dd { font-size: 30px; }
+  .motion-facts dt { max-width: 12ch; font-size: 11px; }
+  .contact-motion-ambient { top: 36px; right: 14px; width: 170px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-motion-running { opacity: 1 !important; transform: none !important; will-change: auto; }
+  .contact-word-accent, .contact-motion-ambient { display: none; }
+  .contact h2 .contact-motion-word { color: inherit !important; }
+}
+@media print {
+  .section-motion-running { opacity: 1 !important; transform: none !important; }
+  .contact-word-accent, .contact-motion-ambient { display: none !important; }
+  .contact h2 .contact-motion-word { color: inherit !important; }
+  .motion-facts { break-inside: avoid; }
+}

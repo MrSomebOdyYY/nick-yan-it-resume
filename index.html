@@ -55,10 +55,16 @@
   <link rel="stylesheet" href="styles.css?v=850c73433bf7">
   <link rel="stylesheet" href="assets/taste/motion.css">
   <link rel="stylesheet" href="assets/bookmarks.css?v=ef6c9abd360d">
+  <link rel="stylesheet" href="assets/portfolio-motion.css?v=466ec2c01231">
+  <link rel="stylesheet" href="assets/project-strip.css?v=424535ed2ce8">
+  <link rel="stylesheet" href="assets/section-motion.css?v=b7dc11a287c5">
   <script src="assets/bookmarks.js?v=ff5955a21664" defer></script>
   <script src="assets/vendor/gsap/gsap.min.js" defer></script>
   <script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
   <script src="script.js?v=f8aa5952ec2c" defer></script>
+  <script src="assets/project-strip.js?v=8ddfbbc5f4ed" defer></script>
+  <script src="assets/section-motion.js?v=6da90368e7f9" defer></script>
+  <script src="assets/portfolio-motion.js?v=dcc8cc621c5b" defer></script>
 </head>
 <body>
   <!-- Taste: service portfolio; split hero; existing forest/cream brand; Onest;
@@ -124,8 +130,17 @@
           <p class="resume-updated hero-enter">Résumé updated <time datetime="2026-11-15">15 Nov 2026</time></p>
           <p class="hero-location hero-enter"><svg width="16" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M17 9c0 6-7 12-7 12S3 15 3 9a7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="9" r="2.3" stroke="currentColor" stroke-width="1.5"/></svg> Vancouver, British Columbia</p>
         </div>
-        <div class="hero-visual" role="img" aria-label="Nick Yan’s handwritten signature surrounded by his areas of study: web development, databases and networking">
-          <div class="visual-top"><span>Information technology</span><span class="visual-plus" aria-hidden="true">+</span></div>
+        <div class="hero-visual" role="group" aria-label="Nick Yan’s handwritten signature surrounded by his areas of study: web development, databases and networking">
+          <div class="signature-scene" aria-hidden="true">
+            <div class="scene-daylight"></div>
+            <svg class="scene-ridges" viewBox="0 0 720 180" preserveAspectRatio="none" focusable="false">
+              <path class="ridge-far" d="M0 70 48 91 115 45 142 56 179 33 211 53 235 50 259 67 288 48 320 65 349 47 392 82 423 64 449 71 489 37 511 50 544 25 567 43 588 40 620 78 670 55 720 71V180H0Z"/>
+              <path class="ridge-mid" d="M0 118 51 96 92 107 144 78 180 98 221 81 276 106 319 87 359 99 403 75 449 101 491 83 525 94 580 67 634 92 691 68 720 80V180H0Z"/>
+              <path class="ridge-near" d="M0 137Q82 109 172 128T333 123T478 133T643 111L720 116V180H0Z"/>
+            </svg>
+            <span class="scene-star"></span>
+          </div>
+          <div class="visual-top"><span>Information technology</span><button class="sky-toggle" type="button" aria-pressed="false" hidden><span aria-hidden="true">☼</span> Daylight</button></div>
           <div class="identity-art" aria-hidden="true">
             <svg class="circuit" viewBox="0 0 500 400" fill="none"><path class="circuit-path" d="M250 48V110M70 200H160M340 200H430M250 290V352"/><circle cx="250" cy="200" r="138"/><circle cx="250" cy="200" r="104"/><path class="circuit-path" d="M250 62C326 62 388 124 388 200"/><circle class="circuit-end" cx="250" cy="48" r="5"/><circle class="circuit-end" cx="70" cy="200" r="5"/><circle class="circuit-end" cx="430" cy="200" r="5"/><circle class="circuit-end" cx="250" cy="352" r="5"/></svg>
             <svg class="identity-signature" width="1655" height="620" viewBox="0 0 540 202" aria-hidden="true">
@@ -210,12 +225,17 @@
         </div>
         <div class="hero-foot"><span>Bachelor of Technology · Kwantlen Polytechnic University</span><a class="m-link m-link--bare" href="#projects">Explore projects <span aria-hidden="true">↓</span></a></div>
       </div>
+      <div class="project-strip" data-project-strip></div>
     </section>
     <section class="section projects" id="projects" aria-labelledby="projects-title"><div class="wrap">
       <div class="section-heading"><h2 id="projects-title">Projects &amp; practice<span class="heading-dot">.</span></h2><p>Course projects with source code, <br>worked examples and lab screenshots.</p></div>
       <div class="project-grid" data-book="Projects">
         <article class="project" id="project-windows" data-tab-label="Windows Server">
-          <div class="project-visual visual-evidence"><img src="assets/evidence/windows-ad-group-membership.png" alt="Original lab screenshot showing three security groups nested in Common Access" width="1024" height="871" loading="lazy"></div>
+          <div class="project-visual lab-mosaic">
+            <a href="assets/evidence/windows-ad-group-membership.png" aria-label="View group membership screenshot at full size"><img src="assets/evidence/windows-ad-group-membership.png" alt="Original lab screenshot showing three security groups nested in Common Access" width="1024" height="871" loading="lazy"><span>Group membership</span></a>
+            <a href="assets/evidence/windows-ad-ou-structure.png" aria-label="View directory structure screenshot at full size"><img src="assets/evidence/windows-ad-ou-structure.png" loading="lazy" alt=""><span>Directory structure</span></a>
+            <a href="assets/evidence/windows-share-access-denied.png" aria-label="View access check screenshot at full size"><img src="assets/evidence/windows-share-access-denied.png" loading="lazy" alt=""><span>Access check</span></a>
+          </div>
           <div class="project-copy"><p class="project-meta">01 / Systems administration · INFO 2416</p><h3>Windows access control</h3><p>Organizing Active Directory accounts and groups, then checking who can open shared folders in a Windows Server lab.</p>
           <ul class="tags" aria-label="Technologies"><li>Windows Server</li><li>Active Directory</li><li>Group permissions</li></ul>
           <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Task</h4><p>Manage access for different groups of users in a virtual Windows Server 2016 environment.</p><h4>My coursework</h4><p>Created and reorganized organizational units, inspected delegated permissions, and used nested security groups to manage shared-folder access.</p><h4>Result</h4><p>The report records access checks with representative lab accounts, including an opened Student Centre share and denied access to Celebrity Files.</p><a class="evidence-link" href="coursework.html#windows-ad">View the original lab screenshots <span aria-hidden="true">↗</span></a><p class="detail-context">Academic VirtualBox lab with simulated users and a Windows Server client VM.</p></div></details></div>
@@ -245,7 +265,11 @@
           </div></details></div>
         </article>
         <article class="project" id="project-linux" data-tab-label="Linux">
-          <div class="project-visual visual-evidence"><img src="assets/evidence/linux-apache-https.png" alt="Original lab screenshot of a Kali browser reaching the Ubuntu Apache page over HTTPS" width="1732" height="1137" loading="lazy"></div>
+          <div class="project-visual lab-mosaic">
+            <a href="assets/evidence/linux-apache-https.png" aria-label="View local https site screenshot at full size"><img src="assets/evidence/linux-apache-https.png" alt="Original lab screenshot of a Kali browser reaching the Ubuntu Apache page over HTTPS" width="1732" height="1137" loading="lazy"><span>Local HTTPS site</span></a>
+            <a href="assets/evidence/linux-apache-configtest.png" aria-label="View apache configuration screenshot at full size"><img src="assets/evidence/linux-apache-configtest.png" loading="lazy" alt=""><span>Apache configuration</span></a>
+            <a href="assets/evidence/linux-network-ping.png" aria-label="View connectivity test screenshot at full size"><img src="assets/evidence/linux-network-ping.png" loading="lazy" alt=""><span>Connectivity test</span></a>
+          </div>
           <div class="project-copy"><p class="project-meta">05 / Linux server lab · INFO 2411</p><h3>Apache HTTPS on Ubuntu</h3><p>Configuring an Ubuntu web server and reaching it over HTTPS from a Kali client on a private virtual network.</p>
           <ul class="tags" aria-label="Technologies"><li>Ubuntu Linux</li><li>Apache</li><li>SSH &amp; TLS</li></ul>
           <details><summary>View project details <span aria-hidden="true">+</span></summary><div class="project-detail"><h4>Setup</h4><p>Connected Ubuntu and Kali virtual machines, used SSH, and configured Apache with a self-signed certificate and local hostname mapping.</p><h4>Verification</h4><p>Saved a configuration diff, checked Apache syntax, tested connectivity and opened the HTTPS page from the client. The saved ping test shows four replies with zero packet loss.</p><a class="evidence-link" href="coursework.html#linux-https">View HTTPS, configuration &amp; ping evidence <span aria-hidden="true">↗</span></a><p class="detail-context">Local academic lab using a self-signed certificate. Screenshots document the completed exercise.</p></div></details></div>
@@ -261,6 +285,11 @@
     </div></section>
     <section class="section experience" id="experience" aria-labelledby="experience-title" data-moment="word-highlight"><div class="wrap">
       <div class="experience-heading"><h2 id="experience-title">Experience<span class="heading-dot">.</span></h2><p class="experience-statement">Webpage layouts, visual communication and customer-facing work have given me different ways to contribute to a team.</p></div>
+      <dl class="motion-facts" aria-label="Portfolio at a glance">
+        <div><dt>Selected projects</dt><dd><span data-motion-count="projects">6</span></dd></div>
+        <div><dt>Experience entries</dt><dd><span data-motion-count="experience">3</span></dd></div>
+        <div><dt>Skill areas</dt><dd><span data-motion-count="skills">6</span></dd></div>
+      </dl>
       <div class="experience-list" data-book="Experience">
         <article class="experience-entry" id="experience-design" data-tab-label="Interface design"><div><p class="experience-date">Jun — Aug 2025</p><span class="experience-category">Design &amp; technology</span></div><div><h3>Interface Design</h3><p class="company">Wall (Beijing) Software Limited Company</p></div><p>Supported webpage design and layout, helping arrange content and visual elements on pages.</p></article>
         <article class="experience-entry" id="experience-delivery" data-tab-label="Delivery"><div><p class="experience-date">2024 — present</p><span class="experience-category">Service &amp; communication</span></div><div><h3>Delivery Driver</h3><p class="company">Fantuan · 2024–present<br>Uber Eats · 2025–present</p></div><p>Deliver orders across Burnaby, Richmond and Coquitlam, applying customer communication and time management in day-to-day work.</p></article>
@@ -272,12 +301,12 @@
       <div class="about-intro"><div><p class="about-lead">I’m Nick, an IT student based in Vancouver.</p><p>I’m interested in web and software development, and my coursework also covers databases and networking. I enjoy seeing how the interface, data and underlying network fit together. I’m open to an internship or co-op across these areas, including IT support.</p></div></div>
       <div class="about-grid"><div class="education"><span class="education-mark" aria-hidden="true">KPU<span>↗</span></span><h3>Bachelor of Technology<br>in Information Technology</h3><p>Kwantlen Polytechnic University</p><p class="in-progress"><span class="status-dot" aria-hidden="true"></span> Expected April 2028</p><p class="education-note">Coursework includes systems administration, database design, networking, web development and programming.</p><div class="languages"><h4>Languages</h4><p>English <span>Professional working proficiency</span></p><p>Mandarin Chinese <span>Native</span></p></div></div>
       <div class="skills" data-book="Skills"><h3>Skills in context</h3>
-        <div class="skill-row" id="skill-web" data-tab-label="Web"><div><h4>Web development</h4><span class="skill-context">Coursework &amp; portfolio</span></div><p>HTML · CSS · JavaScript<br><a href="#project-portfolio">See website project ↗</a></p></div>
-        <div class="skill-row" id="skill-data" data-tab-label="Data"><div><h4>Data</h4><span class="skill-context">Coursework</span></div><p>SQL · ER modeling · DDL &amp; DML<br><a href="#project-databases">See database coursework ↗</a></p></div>
-        <div class="skill-row" id="skill-networking" data-tab-label="Networking"><div><h4>Networking</h4><span class="skill-context">INFO 1212 &amp; INFO 2311 · Simulated labs</span></div><p>Cisco Packet Tracer<br>IPv4 subnetting · IPv6 fundamentals<br>Wireless LAN configuration · First-hop redundancy (FHRP)<br><a href="#project-networks">See networking coursework ↗</a></p></div>
-        <div class="skill-row" id="skill-programming" data-tab-label="Programming"><div><h4>Programming</h4><span class="skill-context">Coursework</span></div><p>Java · C++ · Python basics<br><a href="#project-driving">See Java project ↗</a></p></div>
-        <div class="skill-row" id="skill-systems" data-tab-label="Systems"><div><h4>Systems</h4><span class="skill-context">Virtual machine labs</span></div><p>Windows Server · Active Directory<br>Ubuntu · Apache · SSH<br><a href="#project-windows">See systems coursework ↗</a></p></div>
-        <div class="skill-row" id="skill-design" data-tab-label="Design &amp; tools"><div><h4>Design &amp; tools</h4><span class="skill-context">Work &amp; study</span></div><p>Photoshop · Premiere Pro<br>GitHub · VS Code · Eclipse<br>Microsoft Office</p></div>
+        <div class="skill-row" id="skill-web" data-tab-label="Web"><div><h4>Web development</h4><span class="skill-context">Coursework &amp; portfolio</span></div><p><span class="skill-tokens"><span class="skill-chip">HTML</span> <span class="skill-chip">CSS</span> <span class="skill-chip">JavaScript</span></span><a href="#project-portfolio">See website project ↗</a></p></div>
+        <div class="skill-row" id="skill-data" data-tab-label="Data"><div><h4>Data</h4><span class="skill-context">Coursework</span></div><p><span class="skill-tokens"><span class="skill-chip">SQL</span> <span class="skill-chip">ER modeling</span> <span class="skill-chip">DDL &amp; DML</span></span><a href="#project-databases">See database coursework ↗</a></p></div>
+        <div class="skill-row" id="skill-networking" data-tab-label="Networking"><div><h4>Networking</h4><span class="skill-context">INFO 1212 &amp; INFO 2311 · Simulated labs</span></div><p><span class="skill-tokens"><span class="skill-chip">Cisco Packet Tracer</span> <span class="skill-chip">IPv4 subnetting</span> <span class="skill-chip">IPv6 fundamentals</span> <span class="skill-chip">Wireless LAN configuration</span> <span class="skill-chip">First-hop redundancy (FHRP)</span></span><a href="#project-networks">See networking coursework ↗</a></p></div>
+        <div class="skill-row" id="skill-programming" data-tab-label="Programming"><div><h4>Programming</h4><span class="skill-context">Coursework</span></div><p><span class="skill-tokens"><span class="skill-chip">Java</span> <span class="skill-chip">C++</span> <span class="skill-chip">Python basics</span></span><a href="#project-driving">See Java project ↗</a></p></div>
+        <div class="skill-row" id="skill-systems" data-tab-label="Systems"><div><h4>Systems</h4><span class="skill-context">Virtual machine labs</span></div><p><span class="skill-tokens"><span class="skill-chip">Windows Server</span> <span class="skill-chip">Active Directory</span> <span class="skill-chip">Ubuntu</span> <span class="skill-chip">Apache</span> <span class="skill-chip">SSH</span></span><a href="#project-windows">See systems coursework ↗</a></p></div>
+        <div class="skill-row" id="skill-design" data-tab-label="Design &amp; tools"><div><h4>Design &amp; tools</h4><span class="skill-context">Work &amp; study</span></div><p><span class="skill-tokens"><span class="skill-chip">Photoshop</span> <span class="skill-chip">Premiere Pro</span> <span class="skill-chip">GitHub</span> <span class="skill-chip">VS Code</span> <span class="skill-chip">Eclipse</span> <span class="skill-chip">Microsoft Office</span></span></p></div>
       </div></div>
     </div></section>
     <section class="section contact" id="contact" aria-labelledby="contact-title"><div class="wrap">

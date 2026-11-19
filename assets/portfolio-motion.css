@@ -1,0 +1,170 @@
+/* A landscape behind Nick's signature. The controls and ink occupy their own layer. */
+.hero-visual {
+  position: relative;
+  isolation: isolate;
+  background-color: #173b37;
+}
+.signature-scene,
+.signature-scene .scene-daylight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.signature-scene {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 74% 65%, #37645a90, transparent 54%),
+    linear-gradient(155deg, #142e33, #173d39 62%, #315548);
+}
+.scene-daylight {
+  background: radial-gradient(ellipse at 78% 81%, #baaf74b3, transparent 48%),
+    linear-gradient(158deg, #254e4a, #3e6758 63%, #777e57);
+  opacity: 0;
+  transition: opacity 850ms ease;
+}
+.hero-visual.is-daylight .scene-daylight { opacity: 1; }
+.hero-visual > :is(.visual-top,.identity-art,.focus-areas) {
+  position: relative;
+  z-index: 1;
+}
+.hero-visual .visual-top,
+.hero-visual .focus-areas { color: #edf2e6; }
+.scene-ridges {
+  position: absolute;
+  width: 106%;
+  left: -3%;
+  bottom: -2%;
+  height: 30%;
+}
+.ridge-far { fill: #73927c; fill-opacity: .47; }
+.ridge-mid { fill: #3a6254; }
+.ridge-near { fill: #254a40; }
+.scene-star {
+  position: absolute;
+  top: 23%;
+  right: 25%;
+  width: 13px;
+  height: 13px;
+  color: #e2eacb;
+  transition: opacity 600ms;
+}
+.scene-star::after {
+  content: "";
+  display: block;
+  height: 100%;
+  background: currentColor;
+  clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 60%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.is-daylight .scene-star { opacity: .33; }
+.sky-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #759286;
+  border-radius: 99px;
+  padding: 5px 11px;
+  color: #eff4e9;
+  background: #15382ed9;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+}
+.sky-toggle::after { content: ""; position: absolute; inset: -8px 0; }
+.sky-toggle > span { font: 19px/1 system-ui,sans-serif; }
+.sky-toggle[hidden] { display: none; }
+.sky-toggle[aria-pressed="true"] { background: #dce7d5; color: #183e35; border-color: #dce7d5; }
+.sky-toggle:focus-visible { outline: 2px solid #f5f4df; outline-offset: 3px; }
+
+/* Each image is an original screenshot, with a separate full-size link. */
+.bookmark-book .project .lab-mosaic,
+.project .lab-mosaic {
+  display: grid;
+  grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr);
+  grid-template-rows: repeat(2,minmax(0,1fr));
+  place-items: stretch;
+  aspect-ratio: 1.48;
+  padding: 0;
+  gap: 7px;
+  max-height: 410px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.lab-mosaic > a {
+  position: relative;
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #a9b9ac;
+  border-radius: 9px;
+  background: white;
+  cursor: zoom-in;
+}
+.lab-mosaic > a:first-child { grid-column: 2; grid-row: 1/3; }
+.lab-mosaic > a:focus-visible { outline: 3px solid #245842; outline-offset: 1px; }
+.bookmark-book .project .lab-mosaic img,
+.project .lab-mosaic img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 35% 35%;
+  transition: transform 320ms ease;
+}
+.lab-mosaic > a > span {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  max-width: calc(100% - 12px);
+  border-radius: 4px;
+  padding: 3px 6px;
+  background: #163a31f2;
+  color: #f8faf5;
+  font: 500 clamp(11px, 1.2vw, 13px)/1.35 var(--font-text, sans-serif);
+}
+.skill-tokens { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #eff2e8;
+  color: #214c3c;
+  border: 1px solid #9fb39b;
+  border-radius: 99px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.skill-chip:nth-child(2n) { background: #315745; color: #f7f8ef; border-color: #315745; }
+.skill-tokens + a { margin-top: 9px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-intro-enabled .scene-star::after { animation: scene-glint 1.25s .32s ease-in-out both; }
+  .bookmark-book .skill-row:not([hidden]) .skill-chip { animation: skill-note-in 350ms var(--chip-delay,0ms) cubic-bezier(.22,.72,.25,1) backwards; }
+  .skill-chip:nth-child(2n) { --chip-delay: 50ms; }
+  .skill-chip:nth-child(3n) { --chip-delay: 95ms; }
+  .bookmark-page:not([hidden]) .lab-mosaic > a { animation: lab-tile-in 400ms var(--tile-delay,0ms) ease-out backwards; }
+  .lab-mosaic > a:nth-child(2) { --tile-delay: 50ms; }
+  .lab-mosaic > a:nth-child(3) { --tile-delay: 100ms; }
+  @keyframes lab-tile-in {
+    from { opacity: .55; transform: translateY(7px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes scene-glint {
+    0%,100% { opacity: .78; transform: scale(.85); }
+    50% { opacity: 1; transform: scale(1.34) rotate(18deg); }
+  }
+  @keyframes skill-note-in {
+    from { opacity: .35; transform: translateY(7px) rotate(-2.5deg); }
+    to { opacity: 1; transform: none; }
+  }
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .lab-mosaic > a:is(:hover,:focus-visible) img { transform: scale(1.045); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .scene-daylight,.scene-star { transition: none; }
+}
+@media print {
+  .project .lab-mosaic,.sky-toggle { display: none !important; }
+  .skill-chip { padding: 0 4px; border: 0; color: inherit; background: none; }
+}

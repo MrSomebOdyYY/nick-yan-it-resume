@@ -33,7 +33,19 @@ figcaption span{display:block;margin-top:4px}
 .subnet-examples dl>div{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;padding:6px 0}
 .subnet-examples dd{margin:0;font-variant-numeric:tabular-nums;text-align:right}
 .subnet-examples dt{color:var(--muted)}
-.evidence-footer{display:flex;justify-content:space-between;align-items:center;padding-block:36px;gap:24px;font-size:14px}
+.evidence-footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding-block:36px;gap:24px;font-size:14px}
+.evidence-footer-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.evidence-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding-inline: 12px;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.evidence-home:is(:hover, :focus-visible) { background: #e2eadb; color: #183e35; }
 @media(max-width:700px){
   .evidence-header>.wrap{min-height:80px;gap:12px}
   .evidence-header .wordmark{font-size:16px;gap:8px}

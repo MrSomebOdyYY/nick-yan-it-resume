@@ -1,8 +1,10 @@
-/* Keep the current font for this visit if a slow download misses the first paint,
-   instead of changing text metrics after the visitor starts reading. */
-@font-face{font-family:Onest;src:url('assets/fonts/Onest-400.ttf') format('truetype');font-style:normal;font-weight:400;font-display:optional}
-@font-face{font-family:Onest;src:url('assets/fonts/Onest-500.ttf') format('truetype');font-style:normal;font-weight:500;font-display:optional}
-@font-face{font-family:Onest;src:url('assets/fonts/Onest-600.ttf') format('truetype');font-style:normal;font-weight:600;font-display:optional}
+@font-face {
+  font-family: Onest;
+  src: url('assets/fonts/onest-latin-variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: optional;
+}
 :root{
   --p-bg:#f8f7f2;--p-surface:#eeeee6;--p-ink:#183e35;--p-muted:#52665e;
   --p-accent:#215c48;--p-accent-ink:#f8f7f2;--p-action:#215c48;--p-action-ink:#f8f7f2;
@@ -186,3 +188,21 @@ html:not(.js) .site-header{position:relative;height:auto}html:not(.js) .nav-wrap
 /* ScrollTrigger restores inline smooth scrolling after refresh; keyboard and reduced-motion settings take priority. */
 html.keyboard-nav{scroll-behavior:auto!important}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
+/* Keep one verifiable outcome and its supporting evidence in view in each project. */
+.project-copy > .project-result {
+  padding-inline-start: 14px;
+  border-inline-start: 2px solid #42694d;
+  line-height: 1.5;
+}
+.project-result a {
+  display: table;
+  padding-block: 7px;
+  color: #245340;
+  font-size: .9rem;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+@media (pointer: coarse) {
+  .project-result a { min-height: 44px; align-content: center; }
+}

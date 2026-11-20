@@ -50,3 +50,28 @@ figcaption span{display:block;margin-top:4px}
 }
 @media(max-width:360px){.evidence-header .monogram{display:none}.subnet-examples dl{font-size:12px}.subnet-examples dl>div{gap:8px}.subnet-examples h3{font-size:20px}}
 @media print{.evidence-header,.evidence-index,.evidence-footer{display:none}.evidence-intro,.evidence-section{padding-block:24px}.proof-grid{grid-template-columns:1fr 1fr}.proof-grid figure,.subnet-examples article{break-inside:avoid}}
+
+.sql-example {
+  margin: 16px 0 22px;
+  padding: 16px 18px;
+  max-width: 100%;
+  overflow-x: auto;
+  background: #eaf0e5;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: 14px/1.6 ui-monospace, Menlo, Consolas, monospace;
+  tab-size: 4;
+}
+.sql-example code { font: inherit; }
+.result-scroll { max-width: 100%; overflow-x: auto; }
+.query-result { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.query-result caption { text-align: left; font-weight: 600; padding: 0 0 10px; }
+.query-result th, .query-result td { padding: 10px 12px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--line); }
+.query-result th { background: #eaf0e5; }
+.sample-disclosure summary { cursor: pointer; text-decoration: underline; text-underline-offset: 4px; padding: 12px 0; }
+.sample-disclosure p { margin-top: 8px; }
+@media (max-width: 600px) {
+  .sql-example { font-size: 12px; padding: 12px; }
+  .query-result th, .query-result td { padding: 8px; }
+}

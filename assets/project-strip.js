@@ -36,9 +36,9 @@
     link.href = '#' + project.id;
     link.draggable = false;
     const image = document.createElement('img');
-    image.src = evidence.getAttribute('src');
-    image.width = Number(evidence.getAttribute('width')) || evidence.width;
-    image.height = Number(evidence.getAttribute('height')) || evidence.height;
+    image.src = project.dataset.stripThumb || evidence.getAttribute('src');
+    image.width = project.dataset.stripThumb ? 480 : Number(evidence.getAttribute('width')) || evidence.width;
+    image.height = project.dataset.stripThumb ? 300 : Number(evidence.getAttribute('height')) || evidence.height;
     image.alt = '';
     image.loading = 'lazy';
     image.decoding = 'async';
@@ -57,7 +57,7 @@
   const prev = actions.querySelector('.strip-prev');
   const next = actions.querySelector('.strip-next');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let playing = !reduced.matches;
+  let playing = false;
   let inView = false;
   let hovering = false;
   let frame = 0;

@@ -5,9 +5,10 @@
   --book-edge: #b3c1ad;
   --book-ink: #183e35;
   --book-muted: #52665e;
-  --book-fill: #dce7d5;
-  --book-wave: #c6dea9;
-  --book-tab: var(--book-fill);
+  --book-fill: #eff3eb;
+  --book-wave: #d6e4d0;
+  --book-tab: #e8ede4;
+  --book-marker: #215642;
   position: relative;
   min-width: 0;
   max-width: 100%;
@@ -44,8 +45,8 @@
   align-items: flex-end;
   gap: 5px;
   min-width: 0;
-  min-height: 72px;
-  padding: 8px 0 0;
+  min-height: 52px;
+  padding: 4px 0 0;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
@@ -64,11 +65,11 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 64px;
+  min-height: 48px;
   max-width: 260px;
-  padding: 13px 20px;
+  padding: 8px 18px;
   border: 1px solid var(--book-edge);
-  border-radius: 12px 12px 0 0;
+  border-radius: 9px 9px 0 0;
   background: var(--book-tab);
   color: var(--book-ink);
   font: 500 14px/1.35 var(--font-text, system-ui, sans-serif);
@@ -78,16 +79,12 @@
   transition: background-color 150ms var(--ease), color 150ms var(--ease),
     border-color 150ms var(--ease);
 }
-.bookmark-book .bookmark-tab:nth-child(6n + 2) { --book-tab: #e8e0c7; }
-.bookmark-book .bookmark-tab:nth-child(6n + 3) { --book-tab: #dbe5e1; }
-.bookmark-book .bookmark-tab:nth-child(6n + 4) { --book-tab: #eadbd1; }
-.bookmark-book .bookmark-tab:nth-child(6n + 5) { --book-tab: #d9e5e9; }
-.bookmark-book .bookmark-tab:nth-child(6n + 6) { --book-tab: #e5e5cd; }
 .bookmark-book .bookmark-tab[aria-selected="true"] {
   z-index: 1;
   border-bottom-color: var(--book-paper);
   background: var(--book-paper);
-  box-shadow: inset 0 3px 0 #215c48;
+  color: var(--book-marker);
+  box-shadow: inset 0 3px 0 var(--book-marker);
 }
 .bookmark-book .bookmark-tab:focus-visible {
   outline: 2px solid #215c48;
@@ -97,7 +94,7 @@
   display: flex;
   flex: 0 0 auto;
   gap: 8px;
-  padding: 0 0 10px;
+  padding: 0 0 2px;
 }
 .bookmark-book :is(.bookmark-prev, .bookmark-next) {
   appearance: none;
@@ -285,14 +282,6 @@
 @media (max-width: 1050px) {
   .bookmark-book .bookmark-pages { padding: 28px; }
   .bookmark-book .bookmark-pages > .project { gap: 28px; }
-  .skills.bookmark-book .bookmark-controls { flex-wrap: wrap; gap: 0; }
-  .skills.bookmark-book .bookmark-rail { flex-basis: 100%; order: 1; }
-  .skills.bookmark-book .bookmark-arrows {
-    order: 0;
-    justify-content: flex-end;
-    margin-left: auto;
-    padding: 0;
-  }
 }
 
 @media (max-width: 760px) {
@@ -319,9 +308,9 @@
 
 @media (max-width: 620px) {
   .bookmark-book .bookmark-controls { gap: 8px; }
-  .bookmark-book .bookmark-rail { gap: 4px; min-height: 66px; }
-  .bookmark-book .bookmark-tab { min-height: 58px; padding: 12px 15px; font-size: 13px; }
-  .bookmark-book .bookmark-arrows { gap: 4px; padding-bottom: 7px; }
+  .bookmark-book .bookmark-rail { gap: 4px; }
+  .bookmark-book .bookmark-tab { padding-inline: 14px; font-size: 13px; }
+  .bookmark-book .bookmark-arrows { gap: 4px; }
   .bookmark-book .bookmark-pages { padding: 22px; border-radius: 0 12px 12px 12px; }
   .bookmark-book .bookmark-page { scroll-margin-top: 80px; }
   .bookmark-book .bookmark-pages > .project { gap: 24px; }
@@ -337,9 +326,7 @@
   .bookmark-book .experience-date { font-size: 12px; }
   .bookmark-book .experience-category { font-size: 12px; }
   .experience-list.bookmark-book { margin-top: 32px; }
-  .skills.bookmark-book .bookmark-controls { flex-wrap: nowrap; gap: 8px; }
-  .skills.bookmark-book .bookmark-rail { flex-basis: auto; order: 0; }
-  .skills.bookmark-book .bookmark-arrows { order: 1; margin-left: 0; padding: 0 0 7px; }
+  .skills.bookmark-book .bookmark-controls { gap: 8px; }
   .skills.bookmark-book .bookmark-pages { padding: 24px; border-top-left-radius: 0; }
   .bookmark-book .bookmark-pages > .skill-row { min-height: 170px; }
 }
@@ -400,4 +387,15 @@
     break-inside: avoid;
   }
   .bookmark-book .experience-entry > p { margin-top: 14px; }
+}
+
+.bookmark-book .skill-row .skill-note {
+  display: block;
+  max-width: 54ch;
+  margin-block: .7rem;
+  line-height: 1.6;
+}
+.bookmark-book .skill-row a + a { margin-inline-start: 1rem; }
+@media (max-width: 620px) {
+  .bookmark-book .skill-row a + a { display: flex; width: fit-content; margin-inline-start: 0; }
 }

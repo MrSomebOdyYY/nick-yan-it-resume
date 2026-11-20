@@ -1,8 +1,17 @@
 # Nick Yan — IT résumé website
 
-Public site: https://mrsomebodyyy.github.io/nick-yan-it-resume/
+[Open Nick Yan’s portfolio](https://mrsomebodyyy.github.io/nick-yan-it-resume/)
 
-An English portfolio for IT internship and co-op applications, built with static HTML, CSS and JavaScript. Projects, experience and skills each have a row of bookmarks. Projects include selected coursework evidence.
+I’m an Information Technology student at KPU in Vancouver. I’m looking for an internship or co-op. This portfolio brings together the lab checks, queries and small programs I can discuss in an interview.
+
+| Project | What to look for |
+| --- | --- |
+| [Windows access control](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-windows) | One test account could open a shared folder and was denied access to a restricted folder. |
+| [Apache HTTPS on Ubuntu](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-linux) | A Kali client reached the Apache site using a local hostname and a self-signed certificate. |
+| [Networking](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-networks) | IPv4 subnet calculations and an Ethernet frame inspected in Cisco Packet Tracer. |
+| [Property database](assets/evidence/database-schema.sql) | Nine SQL tables link buyers, properties, bills and payments. |
+| [Java driving simulation](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-driving) | A console program estimates fuel costs and compares them with a trip budget. |
+| [Portfolio website](index.html) | I supplied the work samples and directed the design. The implementation was AI-assisted. |
 
 ## Edit in VS Code
 
@@ -26,7 +35,7 @@ In `index.html`, copy a whole entry inside the appropriate `data-book` container
 
 ## Content and accessibility
 
-Project descriptions distinguish individual coursework, group work, supplied lab materials and AI-assisted website development. The coursework page includes source files and selected original evidence, with the limitations of classroom and virtual-machine work stated explicitly. The résumé was updated on November 19, 2026.
+Project descriptions distinguish individual coursework, group work, supplied lab materials and AI-assisted website development. The coursework page includes source files and selected original evidence, with the limitations of classroom and virtual-machine work stated explicitly.
 
 The site uses a forest-green and cream palette, locally hosted Onest fonts, CSS entrance animations and GSAP scroll-linked highlighting. The entrance begins with the stylesheet, continues independently of external scripts, and pauses while its tab is hidden. Reduced-motion preferences are respected; content remains readable without JavaScript. Navigation supports keyboard use, and project details use native disclosure controls. The local fonts use optional loading to avoid a late font swap; retain the early navigation setup when editing the header.
 

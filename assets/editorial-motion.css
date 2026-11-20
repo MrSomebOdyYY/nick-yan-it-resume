@@ -1,0 +1,101 @@
+/* Let the native disclosure keep focus, activation and find-in-page behavior. */
+:root {
+  --editorial-ease: cubic-bezier(.22, .7, .2, 1);
+}
+
+.site-footer .footer-name {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 48px;
+  width: fit-content;
+  border-block-end: 1px solid transparent;
+}
+.site-footer .footer-name img {
+  display: block;
+  width: clamp(106px, 10vw, 132px);
+  height: auto;
+}
+.site-footer .footer-name:is(:hover, :focus-visible) {
+  border-block-end-color: currentColor;
+}
+@media print {
+  .site-footer .footer-name img { filter: brightness(0); }
+}
+
+.project-copy > details > summary > span {
+  transform-origin: center;
+  transition: transform 240ms var(--editorial-ease);
+}
+
+:is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a) {
+  min-block-size: 44px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  text-underline-offset: .22em;
+}
+
+/* Touch links retain an underline; fine pointers add ink to the same link. */
+@media (hover: hover) and (pointer: fine) {
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a) {
+    position: relative;
+    text-decoration: none;
+  }
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a)::before,
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a)::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 .36rem;
+    height: 1px;
+    background: currentColor;
+    pointer-events: none;
+  }
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a)::before {
+    opacity: .42;
+  }
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a)::after {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a):is(:hover, :focus-visible)::after {
+    transform: scaleX(1);
+  }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a)::after {
+    transition: transform 220ms var(--editorial-ease);
+  }
+  @supports selector(details::details-content) and (interpolate-size: allow-keywords) and (transition-behavior: allow-discrete) {
+    :is(.project-copy > details, .sample-disclosure)::details-content {
+      interpolate-size: allow-keywords;
+      block-size: 0;
+      overflow: clip;
+      transition: block-size 330ms var(--editorial-ease),
+                  content-visibility 330ms allow-discrete;
+    }
+    :is(.project-copy > details, .sample-disclosure)[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 190ms;
+    animation-timing-function: ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-copy > details > summary > span { transition: none; }
+}
+
+@media (forced-colors: active) {
+  :is(.evidence-link, .evidence-back, .evidence-index a, .skill-row a) {
+    text-decoration: underline LinkText;
+  }
+}

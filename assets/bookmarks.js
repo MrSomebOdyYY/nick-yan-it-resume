@@ -80,7 +80,7 @@
         { clipPath: circle(0), backgroundColor: 'var(--book-wave)' },
         { clipPath: circle(radius), backgroundColor: 'var(--book-wave)', offset: .76 },
         { clipPath: circle(radius), backgroundColor: 'var(--book-fill)' }
-      ], { duration: 400, easing: 'cubic-bezier(.3,.05,.3,1)', fill: 'both' });
+      ], { duration: 280, easing: 'cubic-bezier(.22,.7,.2,1)', fill: 'both' });
       ripple.onfinish = settle;
     };
   }

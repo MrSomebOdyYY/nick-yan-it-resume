@@ -6,6 +6,7 @@ I’m an Information Technology student at KPU in Vancouver. I’m looking for a
 
 | Project | What to look for |
 | --- | --- |
+| [Track Speed for Android](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-track-speed) | A Java app for comparing GPS-timed standing starts. The project includes timing tests, source code and an installable Android APK. |
 | [Windows access control](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-windows) | One test account could open a shared folder and was denied access to a restricted folder. |
 | [Apache HTTPS on Ubuntu](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-linux) | A Kali client reached the Apache site using a local hostname and a self-signed certificate. |
 | [Networking](https://mrsomebodyyy.github.io/nick-yan-it-resume/#project-networks) | IPv4 subnet calculations and an Ethernet frame inspected in Cisco Packet Tracer. |

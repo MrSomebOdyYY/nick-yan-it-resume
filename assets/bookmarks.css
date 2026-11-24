@@ -220,6 +220,34 @@
   overflow-wrap: anywhere;
 }
 
+#project-track-speed .track-speed-evidence {
+  flex-direction: column;
+  gap: 16px;
+  height: auto;
+  aspect-ratio: auto;
+  padding: clamp(20px, 3vw, 40px);
+  background: #142733;
+  color: #eef7f2;
+}
+#project-track-speed .track-speed-evidence img {
+  width: clamp(56px, 6vw, 80px);
+  height: auto;
+  transform: none;
+}
+.track-speed-evidence table {
+  width: 100%;
+  max-width: 21rem;
+  border-collapse: collapse;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.track-speed-evidence caption { margin-bottom: 10px; font-weight: 600; text-align: left; }
+.track-speed-evidence :is(th, td) { padding: 5px 0; border-bottom: 1px solid #50646c; }
+.track-speed-evidence th { font-weight: 500; }
+.track-speed-evidence thead { color: #b4d7cd; font-size: .82rem; }
+.track-speed-evidence tr > :first-child { text-align: left; }
+.track-speed-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 24px; margin-top: 12px; }
+
 /* Short work entries need a compact sheet, not a full-screen empty panel. */
 .bookmark-book .bookmark-pages > .experience-entry {
   display: grid;

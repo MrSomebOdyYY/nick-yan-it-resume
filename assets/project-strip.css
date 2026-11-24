@@ -84,6 +84,7 @@
   border-bottom: 1px solid #c3cfc1;
 }
 .project-strip-list a[href="#project-databases"] img { object-position: center; }
+.project-strip-list a[href="#project-track-speed"] img { object-fit: contain; object-position: center; padding: 8px; background: #142733; }
 .project-strip-list a[href="#project-networks"] img { object-position: 25% 37%; }
 .project-strip-list a[href="#project-portfolio"] img { object-position: 50% 33%; }
 .project-strip-list span {

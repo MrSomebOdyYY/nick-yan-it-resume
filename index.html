@@ -54,9 +54,9 @@
   <link rel="preload" href="assets/fonts/onest-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?v=7abb97a43410">
   <link rel="stylesheet" href="assets/taste/motion.css">
-  <link rel="stylesheet" href="assets/bookmarks.css?v=17d13c7d86d3">
+  <link rel="stylesheet" href="assets/bookmarks.css?v=0d6e540b3a04">
   <link rel="stylesheet" href="assets/portfolio-motion.css?v=466ec2c01231">
-  <link rel="stylesheet" href="assets/project-strip.css?v=424535ed2ce8">
+  <link rel="stylesheet" href="assets/project-strip.css?v=794e7eb79bcc">
   <link rel="stylesheet" href="assets/section-motion.css?v=163263c7d265">
   <script src="assets/bookmarks.js?v=2afb09749084" defer></script>
   <script src="assets/vendor/gsap/gsap.min.js" defer></script>
@@ -230,8 +230,41 @@
       <div class="project-strip" data-project-strip></div>
     </section>
     <section class="section projects" id="projects" aria-labelledby="projects-title"><div class="wrap">
-      <div class="section-heading"><h2 id="projects-title">Projects &amp; practice<span class="heading-dot">.</span></h2><p>Course projects with source code, <br>worked examples and lab screenshots.</p></div>
+      <div class="section-heading"><h2 id="projects-title">Projects &amp; practice<span class="heading-dot">.</span></h2><p>Personal software and coursework, <br>with source code, tests and lab screenshots.</p></div>
       <div class="project-grid" data-book="Projects">
+        <article class="project" id="project-track-speed" data-tab-label="Track Speed" data-strip-title="Track Speed for Android">
+          <div class="project-visual track-speed-evidence">
+            <img src="assets/images/track-speed-icon.png" alt="Track Speed app icon: a mint needle on a dark speedometer" width="300" height="300" loading="lazy">
+            <table>
+              <caption>Simulated 0–100 km/h starts</caption>
+              <thead><tr><th scope="col">Run</th><th scope="col">Time</th><th scope="col">Best so far</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">1</th><td>8 s</td><td>8 s</td></tr>
+                <tr><th scope="row">2</th><td>10 s</td><td>8 s</td></tr>
+                <tr><th scope="row">3</th><td>6 s</td><td>6 s</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="project-copy">
+            <p class="project-meta">Personal project · Android</p>
+            <h3>Track Speed for Android</h3>
+            <p>I built Track Speed with Codex to compare standing starts on a closed course. I tested it on my Huawei Mate 60 Pro+. It records GPS speed and G-force offline and keeps the fastest valid run in each session.</p>
+            <div class="track-speed-links">
+              <a class="evidence-link" href="https://github.com/MrSomebOdyYY/track-speed-android/releases/latest/download/TrackSpeed.apk">Download Android APK <span aria-hidden="true">↓</span></a>
+              <a class="evidence-link" href="https://github.com/MrSomebOdyYY/track-speed-android" target="_blank" rel="noopener noreferrer">View source on GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+            <ul class="tags" aria-label="Technologies"><li>Java</li><li>Android SDK</li><li>GPS &amp; motion sensors</li></ul>
+            <details><summary>View project details <span aria-hidden="true">+</span></summary>
+              <div class="project-detail">
+                <h4>How the timing works</h4>
+                <p>The app estimates when the vehicle crosses a speed threshold between two GPS readings. A gap longer than 2.5 seconds breaks the attempt, so missing readings cannot produce a new best time.</p>
+                <h4>After a session</h4>
+                <p>I can compare speed curves from earlier sessions or export timestamped GPS and motion-sensor samples to CSV. Recordings stay on the phone until I export them.</p>
+                <a class="evidence-link" href="https://github.com/MrSomebOdyYY/track-speed-android/blob/main/tests/MeasurementTest.java" target="_blank" rel="noopener noreferrer">Read the timing tests <span aria-hidden="true">↗</span></a>
+              </div>
+            </details>
+          </div>
+        </article>
         <article class="project" id="project-windows" data-tab-label="Windows Server" data-strip-thumb="assets/evidence/thumbnails/gallery-windows.webp?v=a8af1c952db5">
           <div class="project-visual lab-mosaic">
             <a href="assets/evidence/windows-ad-group-membership.png" aria-label="View group membership screenshot at full size"><img src="assets/evidence/windows-ad-group-membership.png" alt="Original lab screenshot showing three security groups nested in Common Access" width="1024" height="871" loading="lazy"><span>Group membership</span></a>
@@ -307,7 +340,7 @@
         <div class="skill-row" id="skill-web" data-tab-label="Web"><div><h4>Web development</h4><span class="skill-context">HTML/CSS coursework · AI-assisted portfolio</span></div><p><span class="skill-tokens"><span class="skill-chip">HTML</span> <span class="skill-chip">CSS</span> <span class="skill-chip">JavaScript</span></span><a href="coursework.html#first-portfolio">Explore my four-page HTML/CSS project ↗</a><a href="#project-portfolio">See my role in this portfolio ↗</a></p></div>
         <div class="skill-row" id="skill-data" data-tab-label="Data"><div><h4>Data</h4><span class="skill-context">Coursework</span></div><p><span class="skill-tokens"><span class="skill-chip">SQL</span> <span class="skill-chip">ER modeling</span> <span class="skill-chip">Table definitions</span></span><a href="#project-databases">See database coursework ↗</a></p></div>
         <div class="skill-row" id="skill-networking" data-tab-label="Networking"><div><h4>Networking</h4><span class="skill-context">IPv4 lab work · INFO 1212</span></div><p><span class="skill-tokens"><span class="skill-chip">Cisco Packet Tracer</span> <span class="skill-chip">IPv4 subnetting</span> <span class="skill-chip">Ethernet frames</span></span><span class="skill-note">INFO 2311 coursework covered IPv6, wireless LANs and first-hop redundancy (FHRP).</span><a href="#project-networks">View my IPv4 lab ↗</a></p></div>
-        <div class="skill-row" id="skill-programming" data-tab-label="Programming"><div><h4>Programming</h4><span class="skill-context">Coursework</span></div><p><span class="skill-tokens"><span class="skill-chip">Java</span> <span class="skill-chip">C++ fundamentals</span> <span class="skill-chip">Python fundamentals</span></span><span class="skill-note"><strong>C++ · Grade report.</strong> My program averages test scores and looks up a student by ID. With scores of 60 and 70, the lookup returned 65.00 and a C.</span><span class="skill-note"><strong>Python · Fuel cost.</strong> My introductory script converts a price in cents per litre into a total in dollars. At 169.9¢/L, 20 litres came to $33.98.</span><a href="#project-driving">View my Java driving simulation ↗</a></p></div>
+        <div class="skill-row" id="skill-programming" data-tab-label="Programming"><div><h4>Programming</h4><span class="skill-context">Coursework &amp; personal projects</span></div><p><span class="skill-tokens"><span class="skill-chip">Java</span> <span class="skill-chip">C++ fundamentals</span> <span class="skill-chip">Python fundamentals</span></span><span class="skill-note"><strong>C++ · Grade report.</strong> My program averages test scores and looks up a student by ID. With scores of 60 and 70, the lookup returned 65.00 and a C.</span><span class="skill-note"><strong>Python · Fuel cost.</strong> My introductory script converts a price in cents per litre into a total in dollars. At 169.9¢/L, 20 litres came to $33.98.</span><a href="#project-track-speed">Explore my Android app ↗</a><a href="#project-driving">View my Java driving simulation ↗</a></p></div>
         <div class="skill-row" id="skill-systems" data-tab-label="Systems"><div><h4>Systems</h4><span class="skill-context">Virtual machine labs</span></div><p><span class="skill-tokens"><span class="skill-chip">Windows Server</span> <span class="skill-chip">Active Directory</span> <span class="skill-chip">Ubuntu</span> <span class="skill-chip">Apache</span> <span class="skill-chip">SSH</span></span><a href="#project-windows">View Windows access checks ↗</a><a href="#project-linux">View the Ubuntu HTTPS test ↗</a></p></div>
         <div class="skill-row" id="skill-design" data-tab-label="Design &amp; tools"><div><h4>Design &amp; tools</h4><span class="skill-context">Work &amp; study</span></div><p><span class="skill-tokens"><span class="skill-chip">Photoshop</span> <span class="skill-chip">Premiere Pro</span> <span class="skill-chip">GitHub</span> <span class="skill-chip">VS Code</span> <span class="skill-chip">Eclipse</span> <span class="skill-chip">Microsoft Office</span></span></p></div>
       </div></div>
